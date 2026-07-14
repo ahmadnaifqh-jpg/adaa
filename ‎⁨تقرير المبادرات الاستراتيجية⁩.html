@@ -1,0 +1,3172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تقرير حالة المبادرات الاستراتيجية – مركز أداء 2025–2028</title>
+<style>
+:root {
+  --teal:        #00A896;
+  --teal-dark:   #005F56;
+  --teal-med:    #007A6E;
+  --gold:        #D4A843;
+  --dark:        #1A2635;
+  --gray:        #6B7280;
+  --gray-lt:     #F3F4F6;
+  --green:       #16A34A;
+  --amber:       #D97706;
+  --red:         #DC2626;
+  --blue:        #0369A1;
+  --purple:      #7C3AED;
+  --white:       #FFFFFF;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Segoe UI', 'Arial', sans-serif;
+  background: #111;
+  color: var(--dark);
+  direction: rtl;
+}
+
+/* ========== NAVIGATION ========== */
+#nav {
+  position: fixed;
+  top: 0; right: 0; left: 0;
+  z-index: 1000;
+  background: var(--teal-dark);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 46px;
+  box-shadow: 0 2px 12px #0006;
+}
+#nav .nav-logo {
+  font-size: 18px; font-weight: 800; color: var(--white);
+  letter-spacing: 1px; min-width: 50px;
+}
+#nav .nav-title { color: #C8E6E3; font-size: 13px; flex: 1; text-align: center; }
+#nav .nav-btns { display: flex; gap: 6px; min-width: 120px; justify-content: flex-start; }
+#nav .nav-btn {
+  background: var(--teal-med); color: var(--white);
+  border: none; border-radius: 4px;
+  padding: 5px 14px; font-size: 12px; cursor: pointer;
+  font-family: inherit; transition: background .15s;
+}
+#nav .nav-btn:hover { background: var(--teal); }
+#nav .nav-counter { color: var(--gold); font-size: 13px; font-weight: 600; min-width: 80px; text-align: center; }
+
+/* ========== SIDEBAR ========== */
+#sidebar {
+  position: fixed;
+  top: 46px; right: 0;
+  width: 280px; height: calc(100vh - 46px);
+  background: var(--teal-dark);
+  overflow-y: auto;
+  z-index: 900;
+  transform: translateX(0);
+  transition: transform .25s ease;
+  box-shadow: -2px 0 16px #0004;
+  scrollbar-width: thin; scrollbar-color: var(--teal-med) var(--teal-dark);
+}
+#sidebar.hidden { transform: translateX(100%); }
+#sidebar-toggle {
+  position: fixed;
+  top: 46px; right: 0;
+  z-index: 950;
+  background: var(--gold);
+  border: none;
+  color: var(--teal-dark);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 0 0 0 6px;
+  font-family: inherit;
+  display: none;
+}
+.sidebar-section {
+  padding: 10px 12px 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 1px solid #ffffff15;
+  margin-top: 6px;
+}
+.sidebar-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 14px;
+  color: #C8E6E3;
+  font-size: 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #ffffff0a;
+  transition: background .12s;
+  line-height: 1.4;
+}
+.sidebar-item:hover { background: rgba(255,255,255,.08); }
+.sidebar-item.active { background: var(--teal); color: var(--white); font-weight: 600; }
+.sidebar-item .si-num {
+  min-width: 22px; height: 22px;
+  background: rgba(255,255,255,.15);
+  border-radius: 50%;
+  font-size: 11px; font-weight: 700; color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+}
+.sidebar-dot { width: 8px; height: 8px; border-radius: 50%; min-width: 8px; }
+.dot-complete    { background: var(--green); }
+.dot-late2       { background: var(--red); }
+.dot-late        { background: var(--amber); }
+.dot-on-track    { background: var(--teal); }
+.dot-not-started { background: var(--gray); }
+
+/* ========== MAIN AREA ========== */
+#main {
+  margin-top: 46px;
+  margin-right: 280px;
+  min-height: calc(100vh - 46px);
+  transition: margin-right .25s;
+}
+#main.full { margin-right: 0; }
+
+/* ========== SLIDES ========== */
+.slide {
+  display: none;
+  min-height: calc(100vh - 46px);
+  background: var(--gray-lt);
+  flex-direction: column;
+  animation: fadeIn .2s ease;
+}
+.slide.active { display: flex; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+/* ========== COVER SLIDE ========== */
+#slide-cover {
+  background: linear-gradient(160deg, var(--teal-dark) 0%, #003D37 100%);
+  justify-content: center; align-items: center;
+  position: relative; overflow: hidden;
+}
+#slide-cover .cover-geo1 {
+  position: absolute; bottom: 0; left: 0;
+  width: 45%; height: 35%;
+  background: var(--teal); opacity: .5;
+  clip-path: polygon(0 30%,100% 0,100% 100%,0 100%);
+}
+#slide-cover .cover-geo2 {
+  position: absolute; bottom: 0; right: 35%;
+  width: 65%; height: 28%;
+  background: var(--teal-med); opacity: .4;
+  clip-path: polygon(5% 0,100% 30%,100% 100%,0 100%);
+}
+#slide-cover .cover-box {
+  background: rgba(0,95,86,.75);
+  border: 1px solid rgba(0,168,150,.3);
+  border-radius: 4px;
+  padding: 40px 60px 48px;
+  text-align: center;
+  z-index: 2;
+  max-width: 700px; width: 90%;
+  backdrop-filter: blur(4px);
+}
+#slide-cover .cover-logo { font-size: 42px; font-weight: 900; color: var(--white); margin-bottom: 4px; }
+#slide-cover .cover-sub  { font-size: 13px; color: #C8E6E3; margin-bottom: 28px; }
+#slide-cover .cover-title { font-size: clamp(22px,4vw,34px); font-weight: 800; color: var(--white); margin-bottom: 16px; line-height: 1.4; }
+#slide-cover .cover-year  { font-size: 20px; font-weight: 700; color: var(--gold); margin-bottom: 8px; }
+#slide-cover .cover-date  { font-size: 14px; color: #C8E6E3; }
+.gold-bar-top    { position: absolute; top: 0; left: 0; right: 0; height: 5px; background: var(--gold); }
+.gold-bar-bottom { position: absolute; bottom: 0; left: 0; right: 0; height: 5px; background: var(--gold); }
+
+/* ========== AGENDA SLIDE ========== */
+#slide-agenda {
+  background: var(--gray-lt);
+  display: none;
+  flex-direction: row;
+}
+#slide-agenda.active { display: flex; }
+#slide-agenda .agenda-left {
+  width: 260px; min-height: 100%;
+  background: var(--teal-dark);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+#slide-agenda .agenda-left h2 { color: var(--white); font-size: 26px; writing-mode: vertical-rl; transform: rotate(180deg); }
+#slide-agenda .agenda-right {
+  flex: 1; padding: 50px 40px;
+  display: flex; flex-direction: column; gap: 20px;
+}
+#slide-agenda .agenda-header-bar {
+  background: var(--teal-dark);
+  color: var(--white); font-size: 20px; font-weight: 700;
+  padding: 12px 20px; margin-bottom: 10px;
+  border-right: 5px solid var(--gold);
+}
+.agenda-item {
+  background: var(--white);
+  border: 1px solid #e5e7eb;
+  border-right: 4px solid var(--gold);
+  padding: 16px 20px;
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer; transition: box-shadow .15s, transform .1s;
+  border-radius: 2px;
+}
+.agenda-item:hover { box-shadow: 0 3px 12px #0001; transform: translateY(-1px); }
+.agenda-item .agenda-num {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--teal); color: var(--white);
+  font-size: 18px; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-left: 16px;
+}
+.agenda-item .agenda-text h3 { font-size: 17px; font-weight: 700; color: var(--teal-dark); margin-bottom: 4px; }
+.agenda-item .agenda-text p  { font-size: 12px; color: var(--gray); }
+
+/* ========== STATS SLIDE ========== */
+#slide-stats { flex-direction: column; }
+.kpi-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 16px; padding: 20px 24px; }
+.kpi-card {
+  background: var(--white);
+  border-radius: 4px;
+  padding: 24px 20px 20px;
+  border-right: 5px solid var(--teal-dark);
+  box-shadow: 0 1px 4px #0001;
+}
+.kpi-card .kc-val { font-size: 42px; font-weight: 800; color: var(--teal-dark); line-height: 1; }
+.kpi-card .kc-lbl { font-size: 14px; color: var(--gray); margin-top: 8px; }
+.kpi-card.kc-green  { border-color: var(--green);  } .kpi-card.kc-green  .kc-val { color: var(--green); }
+.kpi-card.kc-amber  { border-color: var(--amber);  } .kpi-card.kc-amber  .kc-val { color: var(--amber); }
+.kpi-card.kc-red    { border-color: var(--red);    } .kpi-card.kc-red    .kc-val { color: var(--red); }
+.kpi-card.kc-blue   { border-color: var(--blue);   } .kpi-card.kc-blue   .kc-val { color: var(--blue); }
+.kpi-card.kc-purple { border-color: var(--purple); } .kpi-card.kc-purple .kc-val { color: var(--purple); }
+
+/* ========== DASHBOARD SLIDE ========== */
+#slide-dashboard { flex-direction: column; }
+.dash-table-wrap { flex: 1; overflow-y: auto; padding: 0 16px 16px; }
+.dash-table {
+  width: 100%; border-collapse: collapse; font-size: 13px;
+}
+.dash-table th {
+  background: var(--teal-dark); color: var(--white);
+  padding: 9px 10px; text-align: right; font-size: 12px;
+  position: sticky; top: 0; z-index: 2;
+}
+.dash-table td { padding: 8px 10px; border-bottom: 1px solid #e5e7eb; }
+.dash-table tbody tr:nth-child(even) { background: #f0fdf9; }
+.clickable-row { cursor: pointer; transition: background .12s; }
+.clickable-row:hover { background: #d1fae5 !important; }
+
+/* ========== SECTION DIVIDER ========== */
+.slide-divider {
+  background: linear-gradient(160deg, var(--teal-dark) 0%, #003D37 100%);
+  justify-content: center; align-items: center;
+  position: relative; overflow: hidden;
+}
+.slide-divider .div-geo1 { position:absolute; bottom:0; left:0; width:45%; height:30%; background:var(--teal); opacity:.5; clip-path:polygon(0 30%,100% 0,100% 100%,0 100%); }
+.slide-divider .div-geo2 { position:absolute; bottom:0; right:30%; width:70%; height:22%; background:var(--teal-med); opacity:.4; clip-path:polygon(5% 0,100% 25%,100% 100%,0 100%); }
+.slide-divider .div-content { z-index:2; text-align:center; }
+.slide-divider .div-num { font-size: 80px; font-weight: 900; color: rgba(255,255,255,.1); line-height: 1; }
+.slide-divider .div-title { font-size: clamp(22px,3.5vw,36px); font-weight: 800; color: var(--white); margin-top: -10px; }
+.slide-divider .div-sub { font-size: 15px; color: #C8E6E3; margin-top: 10px; }
+
+/* ========== SLIDE HEADER ========== */
+.slide-header {
+  display: flex; align-items: center;
+  background: var(--teal-dark);
+  height: 52px; padding: 0 14px;
+  gap: 12px; flex-shrink: 0;
+}
+.header-logo {
+  background: var(--teal-med);
+  color: var(--white); font-size: 16px; font-weight: 800;
+  padding: 0 14px; height: 100%;
+  display: flex; align-items: center;
+  border-right: 3px solid var(--gold); flex-shrink: 0;
+  order: 1;
+}
+.header-title {
+  flex: 1; color: var(--white); font-size: 14px; font-weight: 700;
+  text-align: right; order: 0; line-height: 1.3;
+}
+.header-sub {
+  background: #e8f5f3; color: var(--gray);
+  font-size: 10.5px; padding: 5px 16px;
+  border-bottom: 1px solid #d1e7e4;
+  flex-shrink: 0;
+}
+
+/* ========== INITIATIVE CONTENT ========== */
+.ini-content {
+  flex: 1; display: flex; gap: 0; overflow: hidden;
+}
+.ini-left {
+  width: 34%; background: var(--white);
+  padding: 12px 14px; overflow-y: auto;
+  border-left: 1px solid #e5e7eb;
+  display: flex; flex-direction: column; gap: 10px;
+  scrollbar-width: thin;
+}
+.ini-right {
+  flex: 1; padding: 10px 14px;
+  overflow-y: auto; display: flex; flex-direction: column; gap: 10px;
+  scrollbar-width: thin;
+}
+
+/* KPI strip */
+.kpi-strip { display: grid; grid-template-columns: repeat(4,1fr); gap: 6px; }
+.kpi-box {
+  padding: 8px 6px 6px;
+  border-radius: 3px;
+  text-align: center;
+}
+.kpi-box .kpi-val { font-size: 18px; font-weight: 800; color: var(--white); line-height: 1; }
+.kpi-box .kpi-lbl { font-size: 9px; color: rgba(255,255,255,.8); margin-top: 3px; }
+.kpi-teal   { background: var(--teal-dark); }
+.kpi-blue   { background: var(--blue); }
+.kpi-purple { background: var(--purple); }
+.kpi-gold   { background: #B45309; }
+.kpi-gold .kpi-val { font-size: 13px; }
+
+/* status row */
+.status-row { display: flex; align-items: center; gap: 8px; }
+.badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 3px; padding: 3px 10px;
+  font-size: 11px; font-weight: 700; color: var(--white);
+  white-space: nowrap;
+}
+.badge-lg { font-size: 13px; padding: 5px 16px; }
+.badge-complete    { background: var(--green); }
+.badge-late2       { background: var(--red); }
+.badge-late        { background: var(--amber); }
+.badge-on-track    { background: var(--teal); }
+.badge-not-started { background: var(--gray); }
+.phase-tag {
+  font-size: 11px; color: var(--gray);
+  border: 1px solid #e5e7eb;
+  padding: 3px 8px; border-radius: 20px;
+}
+
+/* info cards */
+.info-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 5px; }
+.info-card { background: #eff6ff; padding: 6px; border-radius: 3px; text-align: center; }
+.info-label { font-size: 9px; color: var(--gray); margin-bottom: 3px; }
+.info-val   { font-size: 11px; font-weight: 700; color: var(--teal-dark); }
+
+/* scope */
+.scope-box { flex: 1; }
+.scope-text {
+  font-size: 11.5px; color: #374151; line-height: 1.7;
+  padding: 8px; background: #f9fafb;
+  border: 1px solid #e5e7eb; border-top: none;
+  border-radius: 0 0 3px 3px;
+}
+
+/* section bars */
+.section-bar {
+  font-size: 10.5px; font-weight: 700; color: var(--white);
+  padding: 5px 10px; border-radius: 2px 2px 0 0;
+}
+.bar-teal      { background: var(--teal-dark); }
+.bar-teal-dark { background: var(--teal-med); }
+.bar-blue      { background: var(--blue); }
+.bar-purple    { background: var(--purple); }
+.bar-green     { background: var(--green); }
+
+/* tables */
+.table-wrap { overflow-x: auto; }
+.data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.data-table th {
+  background: rgba(0,95,86,.12); color: var(--teal-dark);
+  padding: 7px 8px; text-align: right; font-size: 11px;
+  border-bottom: 2px solid var(--teal-med);
+}
+.data-table td { padding: 6px 8px; border-bottom: 1px solid #f0f0f0; vertical-align: middle; }
+.data-table tbody tr:nth-child(even) { background: #f0fdf9; }
+.num-col    { width: 30px; text-align: center; color: var(--gray); }
+.center-col { text-align: center; white-space: nowrap; }
+.budget-col { text-align: center; font-weight: 600; color: var(--teal-dark); white-space: nowrap; }
+.name-col   { min-width: 160px; }
+.empty-note { color: var(--gray); font-size: 12px; padding: 12px; text-align: center; }
+
+/* bottom panels */
+.bottom-panels { display: flex; gap: 10px; flex: 1; min-height: 180px; }
+.panel-miles  { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.panel-delivs { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.panel-delivs .table-wrap { flex: 1; overflow-y: auto; }
+
+/* milestones */
+.miles-list { 
+  flex: 1; overflow-y: auto;
+  background: var(--white); border: 1px solid #e5e7eb; border-top: none;
+  padding: 4px 0;
+}
+.ms-item {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 5px 10px;
+  font-size: 11.5px; color: var(--dark); line-height: 1.4;
+  border-bottom: 1px solid #f3f4f6;
+}
+.ms-item:last-child { border-bottom: none; }
+.ms-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--blue); flex-shrink: 0; margin-top: 4px;
+}
+
+/* ========== SLIDE FOOTER ========== */
+.slide-footer {
+  background: var(--gold); color: var(--teal-dark);
+  font-size: 10px; font-weight: 600;
+  padding: 5px 16px;
+  display: flex; justify-content: space-between;
+  flex-shrink: 0;
+}
+.footer-secret { font-weight: 800; }
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 900px) {
+  #sidebar { display: none; }
+  #sidebar-toggle { display: block; }
+  #main { margin-right: 0; }
+  .ini-content { flex-direction: column; }
+  .ini-left { width: 100%; }
+  .kpi-strip { grid-template-columns: repeat(2,1fr); }
+  .kpi-grid  { grid-template-columns: repeat(2,1fr); }
+  .bottom-panels { flex-direction: column; }
+  #nav .nav-title { display: none; }
+}
+@media print {
+  #nav, #sidebar, #sidebar-toggle { display: none !important; }
+  #main { margin-right: 0 !important; }
+  .slide { display: flex !important; page-break-after: always; min-height: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- ========== TOP NAV ========== -->
+<div id="nav">
+  <div class="nav-logo">أداء</div>
+  <div class="nav-title">تقرير حالة المبادرات الاستراتيجية 2025–2028</div>
+  <div class="nav-counter" id="counter">1 / <span id="total-count"></span></div>
+  <div class="nav-btns">
+    <button class="nav-btn" onclick="prevSlide()">→ السابق</button>
+    <button class="nav-btn" onclick="nextSlide()">التالي ←</button>
+  </div>
+</div>
+
+<!-- ========== SIDEBAR ========== -->
+<div id="sidebar">
+  <div class="sidebar-section">التنقل</div>
+  <div class="sidebar-item" onclick="goTo(0)"><span class="si-num">◉</span> الغلاف</div>
+  <div class="sidebar-item" onclick="goTo(1)"><span class="si-num">☰</span> الأجندة</div>
+  <div class="sidebar-item" onclick="goTo(2)"><span class="si-num">📊</span> لمحة عامة</div>
+  <div class="sidebar-item" onclick="goTo(3)"><span class="si-num">📋</span> لوحة المتابعة</div>
+  <div class="sidebar-section">المبادرات</div>
+  <!-- JS يضيف عناصر المبادرات هنا -->
+  <div id="sidebar-ini-items"></div>
+</div>
+
+<!-- ========== MAIN ========== -->
+<div id="main">
+
+<!-- ===== SLIDE 0: COVER ===== -->
+<div class="slide active" id="slide-cover">
+  <div class="gold-bar-top"></div>
+  <div class="cover-geo1"></div>
+  <div class="cover-geo2"></div>
+  <div class="cover-box">
+    <div class="cover-logo">أداء</div>
+    <div class="cover-sub">المركز الوطني لقياس أداء الأجهزة العامة</div>
+    <div class="cover-title">تقرير حالة المبادرات الاستراتيجية</div>
+    <div class="cover-year">2025 – 2028</div>
+    <div class="cover-date">أبريل 2026م</div>
+  </div>
+  <div class="gold-bar-bottom"></div>
+</div>
+
+<!-- ===== SLIDE 1: AGENDA ===== -->
+<div class="slide" id="slide-agenda">
+  <div class="gold-bar-top"></div>
+  <div class="agenda-left"><h2>المحتويات</h2></div>
+  <div class="agenda-right">
+    <div class="agenda-header-bar">الأجندة</div>
+    <div class="agenda-item" onclick="goTo(2)">
+      <div class="agenda-num">01</div>
+      <div class="agenda-text">
+        <h3>لمحة عامة</h3>
+        <p>إجمالي المبادرات والمشاريع والميزانيات</p>
+      </div>
+    </div>
+    <div class="agenda-item" onclick="goTo(3)">
+      <div class="agenda-num">02</div>
+      <div class="agenda-text">
+        <h3>لوحة متابعة المبادرات</h3>
+        <p>حالة جميع المبادرات الاستراتيجية دفعة واحدة</p>
+      </div>
+    </div>
+    <div class="agenda-item" onclick="goTo(4)">
+      <div class="agenda-num">03</div>
+      <div class="agenda-text">
+        <h3>تفصيل المبادرات</h3>
+        <p>المشاريع والمعالم والمخرجات والميزانيات لكل مبادرة</p>
+      </div>
+    </div>
+  </div>
+  <div class="gold-bar-bottom"></div>
+</div>
+
+<!-- ===== SLIDE 2: STATS ===== -->
+<div class="slide" id="slide-stats">
+  <div class="slide-header">
+    <div class="header-logo">أداء</div>
+    <div class="header-title">لمحة عامة – المبادرات الاستراتيجية</div>
+  </div>
+  <div class="header-sub">المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; 2025–2028</div>
+  <div class="kpi-grid">
+    <div class="kpi-card"><div class="kc-val">21</div><div class="kc-lbl">إجمالي المبادرات الاستراتيجية</div></div>
+    <div class="kpi-card kc-blue"><div class="kc-val">46</div><div class="kc-lbl">إجمالي المشاريع</div></div>
+    <div class="kpi-card kc-amber"><div class="kc-val">248.1 م.ر</div><div class="kc-lbl">الميزانية الإجمالية</div></div>
+    <div class="kpi-card kc-purple"><div class="kc-val">8</div><div class="kc-lbl">مبادرات بدأت / قيد التنفيذ</div></div>
+    <div class="kpi-card kc-green"><div class="kc-val">2</div><div class="kc-lbl">مبادرات مكتملة</div></div>
+    <div class="kpi-card"><div class="kc-val">13</div><div class="kc-lbl">مبادرات لم تبدأ بعد</div></div>
+  </div>
+  <div style="padding:0 24px 20px;display:flex;gap:12px;flex-wrap:wrap;">
+    <div style="background:#fff3e0;border-right:4px solid var(--amber);padding:12px 16px;border-radius:3px;flex:1;min-width:200px;">
+      <div style="font-size:12px;color:var(--gray);margin-bottom:4px;">مبادرات متأخرة</div>
+      <div style="font-size:22px;font-weight:800;color:var(--amber);">1</div>
+    </div>
+    <div style="background:#fef2f2;border-right:4px solid var(--red);padding:12px 16px;border-radius:3px;flex:1;min-width:200px;">
+      <div style="font-size:12px;color:var(--gray);margin-bottom:4px;">مبادرات متأخرة جداً</div>
+      <div style="font-size:22px;font-weight:800;color:var(--red);">5</div>
+    </div>
+    <div style="background:#eff6ff;border-right:4px solid var(--blue);padding:12px 16px;border-radius:3px;flex:1;min-width:200px;">
+      <div style="font-size:12px;color:var(--gray);margin-bottom:4px;">محاور الاستراتيجية</div>
+      <div style="font-size:22px;font-weight:800;color:var(--blue);">4</div>
+    </div>
+  </div>
+  <div class="slide-footer">
+    <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+    <span class="footer-secret">سري للغاية</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 3: DASHBOARD ===== -->
+<div class="slide" id="slide-dashboard">
+  <div class="slide-header">
+    <div class="header-logo">أداء</div>
+    <div class="header-title">لوحة متابعة المبادرات الاستراتيجية</div>
+  </div>
+  <div class="header-sub">اضغط على أي مبادرة للانتقال إلى تفاصيلها</div>
+  <div class="dash-table-wrap">
+    <table class="dash-table">
+      <thead><tr>
+        <th style="width:35px">#</th>
+        <th>المبادرة</th>
+        <th style="width:110px">الحالة</th>
+        <th style="width:90px">الميزانية</th>
+        <th style="width:70px">المشاريع</th>
+        <th style="width:120px">الإدارة المالكة</th>
+      </tr></thead>
+      <tbody id="dash-tbody">
+    <tr onclick="goToIni(1)" class="clickable-row">
+      <td class="num-col">1</td>
+      <td class="name-col">تحديث نموذج تقييم ممارسات إدارة الأداء</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">10.7 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">3</strong></td>
+      <td class="center-col">إدارة الشراكات الاست</td>
+    </tr>
+    <tr onclick="goToIni(2)" class="clickable-row">
+      <td class="num-col">2</td>
+      <td class="name-col">نموذج عمل لتقييم وتحسين ثقافة الأداء في الأجهزة العامة</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">12.8 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">إدارة الشراكات الاست</td>
+    </tr>
+    <tr onclick="goToIni(3)" class="clickable-row">
+      <td class="num-col">3</td>
+      <td class="name-col">مشاركة المعرفة</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">2 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">إدارة الشراكات الاست</td>
+    </tr>
+    <tr onclick="goToIni(4)" class="clickable-row">
+      <td class="num-col">4</td>
+      <td class="name-col">تطوير قدرات الموظفين الحكوميين في إدارة الأداء ورفع الوعي بها</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">13.2 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">إدارة الشراكات الاست</td>
+    </tr>
+    <tr onclick="goToIni(5)" class="clickable-row">
+      <td class="num-col">5</td>
+      <td class="name-col">تطوير معايير نشر بيانات الأداء لتعزيز مستوى الشفافية والموثوقية والتنافسية</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">صفري</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">إدارة الأداء</td>
+    </tr>
+    <tr onclick="goToIni(6)" class="clickable-row">
+      <td class="num-col">6</td>
+      <td class="name-col">تطوير تحليل الأداء القائم على البيانات وذكاء الأعمال</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">25.6 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">2</strong></td>
+      <td class="center-col">إدارة الأداء</td>
+    </tr>
+    <tr onclick="goToIni(7)" class="clickable-row">
+      <td class="num-col">7</td>
+      <td class="name-col">تطوير نظام مركزي موحد لقياس وإدارة الأداء</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">75 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">تقنية الأعمال</td>
+    </tr>
+    <tr onclick="goToIni(8)" class="clickable-row">
+      <td class="num-col">8</td>
+      <td class="name-col">تحديث منهجيات قياس وإدارة الأداء</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">23.2 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">2</strong></td>
+      <td class="center-col">إدارة الأداء</td>
+    </tr>
+    <tr onclick="goToIni(9)" class="clickable-row">
+      <td class="num-col">9</td>
+      <td class="name-col">إدارة التغير ورفع الوعي بمتطلبات إدارة الأداء</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">1 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">2</strong></td>
+      <td class="center-col">إدارة الأداء</td>
+    </tr>
+    <tr onclick="goToIni(10)" class="clickable-row">
+      <td class="num-col">10</td>
+      <td class="name-col">دعم تنفيذ قياس تجربة المستفيد</td>
+      <td><span class="badge badge-late2">متأخر جداً</span></td>
+      <td class="center-col">22.2 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">4</strong></td>
+      <td class="center-col">تجربة المستفيد</td>
+    </tr>
+    <tr onclick="goToIni(11)" class="clickable-row">
+      <td class="num-col">11</td>
+      <td class="name-col">تطوير منهجية ضمان جودة الأداء</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">6.9 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">إدارة الأداء</td>
+    </tr>
+    <tr onclick="goToIni(12)" class="clickable-row">
+      <td class="num-col">12</td>
+      <td class="name-col">مبادرة تحقيق الأداء المنضبط</td>
+      <td><span class="badge badge-complete">مكتمل</span></td>
+      <td class="center-col">صفري</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">إدارة الحوكمة والمخا</td>
+    </tr>
+    <tr onclick="goToIni(13)" class="clickable-row">
+      <td class="num-col">13</td>
+      <td class="name-col">دعم وتفعيل قياس وإدارة أداء الاستراتيجيات المؤسسية</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">26.7 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">3</strong></td>
+      <td class="center-col">إدارة الأداء</td>
+    </tr>
+    <tr onclick="goToIni(14)" class="clickable-row">
+      <td class="num-col">14</td>
+      <td class="name-col">تفصيل الهيكل التنظيمي المقترح والنموذج التشغيلي</td>
+      <td><span class="badge badge-complete">مكتمل</span></td>
+      <td class="center-col">4 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">الموارد البشرية</td>
+    </tr>
+    <tr onclick="goToIni(15)" class="clickable-row">
+      <td class="num-col">15</td>
+      <td class="name-col">استراتيجية الموارد البشرية</td>
+      <td><span class="badge badge-late2">متأخر جداً</span></td>
+      <td class="center-col">2 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">الموارد البشرية</td>
+    </tr>
+    <tr onclick="goToIni(16)" class="clickable-row">
+      <td class="num-col">16</td>
+      <td class="name-col">تقييم وتحسين الثقافة المؤسسية</td>
+      <td><span class="badge badge-late2">متأخر جداً</span></td>
+      <td class="center-col">صفري</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">الموارد البشرية</td>
+    </tr>
+    <tr onclick="goToIni(17)" class="clickable-row">
+      <td class="num-col">17</td>
+      <td class="name-col">دعم تنفيذ الاستراتيجية</td>
+      <td><span class="badge badge-late2">متأخر جداً</span></td>
+      <td class="center-col">14 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">إدارة الاستراتيجية ا</td>
+    </tr>
+    <tr onclick="goToIni(18)" class="clickable-row">
+      <td class="num-col">18</td>
+      <td class="name-col">تعزيز التميز الحوكمي والمؤسسي في المركز من خلال تبني وتطبيق المعايير الوطنية والدولية</td>
+      <td><span class="badge badge-late">متأخر</span></td>
+      <td class="center-col">2.8 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">7</strong></td>
+      <td class="center-col">التميز المؤسسي</td>
+    </tr>
+    <tr onclick="goToIni(19)" class="clickable-row">
+      <td class="num-col">19</td>
+      <td class="name-col">تصميم وتنفيذ نموذج تواصل فعال لتحسين تجربة المستفيدين</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">صفري</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">التميز المؤسسي</td>
+    </tr>
+    <tr onclick="goToIni(20)" class="clickable-row">
+      <td class="num-col">20</td>
+      <td class="name-col">تحديد وتنفيذ خطة إدارة التغيير</td>
+      <td><span class="badge badge-late2">متأخر جداً</span></td>
+      <td class="center-col">صفري</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">إدارة الاستراتيجية ا</td>
+    </tr>
+    <tr onclick="goToIni(21)" class="clickable-row">
+      <td class="num-col">21</td>
+      <td class="name-col">بناء استراتيجية للتحول الرقمي لمركز أداء</td>
+      <td><span class="badge badge-not-started">لم يبدأ</span></td>
+      <td class="center-col">6 م.ر</td>
+      <td class="center-col"><strong style="color:#005F56">1</strong></td>
+      <td class="center-col">تقنية الأعمال</td>
+    </tr></tbody>
+    </table>
+  </div>
+  <div class="slide-footer">
+    <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+    <span class="footer-secret">سري للغاية</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 4: SECTION DIVIDER ===== -->
+<div class="slide slide-divider" id="slide-divider-main">
+  <div class="gold-bar-top"></div>
+  <div class="div-geo1"></div>
+  <div class="div-geo2"></div>
+  <div class="div-content">
+    <div class="div-num">03</div>
+    <div class="div-title">تفصيل المبادرات</div>
+    <div class="div-sub">المشاريع والمعالم والمخرجات والميزانيات</div>
+  </div>
+  <div class="gold-bar-bottom"></div>
+</div>
+
+<!-- ===== INITIATIVE SLIDES ===== -->
+
+    <!-- SLIDE: 1 -->
+    <div class="slide" id="slide-ini-1">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">01. تحديث نموذج تقييم ممارسات إدارة الأداء</div>
+      </div>
+      <div class="header-sub">ACS-SIC.01.PM.SP.01 &nbsp;|&nbsp; إدارة الشراكات الاستراتيجية &nbsp;|&nbsp; مالك المبادرة: محمد العوين</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">3</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">15</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">3</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">10.7 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2025-04-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2025-12-31</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكّن لمنظومة الأداء</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تطوير دليل مرجعي لممارسات إدارة الأداء، ونماذج عمل لإدارة منتجات التمكين وتقييم الأداء بمستويات متدرجة. كما تسعى لربط التقييم بسلسلة قيمة عبر تحسين المنتجات الحالية واستحداث جديدة لسد الفجوات، مع تعزيز التكامل بين المركز والأجهزة لضمان رحلة تمكين فعالة وحوكمة مناسبة.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (3)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">تطوير الدليل الفني الشامل للأداء والتخطيط المؤسسي</td>
+          <td><span class="badge badge-late2">متأخر جداً</span></td>
+          <td class="center-col">2025-07-01</td>
+          <td class="center-col">2025-12-01</td>
+          <td class="budget-col">5.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td class="name-col">تطوير نماذج العمل لتقييم ممارسات إدارة الأداء</td>
+          <td><span class="badge badge-late2">متأخر جداً</span></td>
+          <td class="center-col">2025-07-01</td>
+          <td class="center-col">2025-12-31</td>
+          <td class="budget-col">صفري</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td class="name-col">نموذج عمل لإدارة وتطوير منتجات التمكين وفق احتياج الأجهزة</td>
+          <td><span class="badge badge-late2">متأخر جداً</span></td>
+          <td class="center-col">2025-08-14</td>
+          <td class="center-col">2025-12-31</td>
+          <td class="budget-col">5.3 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (15)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير دراسة وتحليل الوضع الراهن للأداء والتخطيط المؤسسي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير دراسة المقارنة المعيارية لممارسات الأداء والتخطيط المؤسسي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير تحليل الفجوات للوضع الحالي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة الأولية للدليل الفني الشامل للأداء والتخطيط المؤسسي ومشاركتها مع أصحاب المصلحة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الدليل الفني الشامل للأداء والتخطيط المؤسسي واعتماده</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير دراسة وتحليل الوضع الراهن لنموذج عمل تقييم الممارسات الحالي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير دراسة المقارنة المعيارية لنموذج عمل تقييم الممارسات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير تحليل الفجوات للوضع الحالي لنماذج عمل تقييم الممارسات الحالي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة الأولية لنموذج عمل محدث لتقييم ممارسات إدارة الأداء ومراجعتها</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد نموذج عمل تقييم ممارسات إدارة الأداء بما يشمل المعايير وآلية العمل والسياسات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من دراسة وتحليل الوضع الراهن للمنتجات التمكينية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من المقارنات المعيارية لأفضل الممارسات الرائدة للمنتجات التمكينية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير تحليل الفجوات للوضع الحالي للمنتجات التمكينية</div><div class="ms-item"><span class="ms-dot"></span>اكتمال النسخة الأولية لنموذج عمل لإدارة وتطوير منتجات التمكين وفق احتياجات الأجهزة</div><div class="ms-item"><span class="ms-dot"></span>اكتمال تصميم نموذج عمل لإدارة وتطوير منتجات التمكين وفق احتياجات الأجهزة</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (3)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>الدليل الفني الشامل للأداء والتخطيط المؤسسي</td>
+          <td class="budget-col">5.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>نموذج عمل محدث لتقييم ممارسات إدارة الأداء</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>نموذج عمل لإدارة وتطوير منتجات التمكين وفق احتياج الأجهزة</td>
+          <td class="budget-col">5.3 م.ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 2 -->
+    <div class="slide" id="slide-ini-2">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">02. نموذج عمل لتقييم وتحسين ثقافة الأداء في الأجهزة العامة</div>
+      </div>
+      <div class="header-sub">ACS-SIC.01.PM.SP.05 &nbsp;|&nbsp; إدارة الشراكات الاستراتيجية &nbsp;|&nbsp; مالك المبادرة: محمد العوين</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">11</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">5</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">12.8 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2026-04-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2027-01-31</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكّن لمنظومة الأداء</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تحليل واقع ثقافة الأداء في الأجهزة العامة، ومقارنتها بأفضل الممارسات العالمية لتحديد الفجوات وفرص التحسين. وستنتج عنها إطار شامل وأداة قياس دقيقة لتقييم النضج الحالي وإنشاء خط أساس ثقافي، مع توصيات استراتيجية لتعزيز ثقافة الأداء المستدامة.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">نموذج عمل لتقييم وتحسين ثقافة الأداء في الأجهزة العامة</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2026-04-01</td>
+          <td class="center-col">2027-01-31</td>
+          <td class="budget-col">12.8 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (11)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من دراسة وتحليل الوضع الراهن لتحليل ثقافة إدارة الأداء الحالية داخل الجهات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من دراسات المقارنات المعيارية لثقافة إدارة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير تحليل الفجوات لثقافة إدارة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد دراسة مفاهيم وأبعاد ثقافة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير  منهجية القياس التي تشمل (أداة القياس حسب الفئات المستهدفة) والمواءمة مع متطلبات تنظيم ادارة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير النسخة الأولية لنموذج العمل الخاص بالتقييم وآلية تحديد مبادرات التحسين والتوصيات ومتابعتها</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير النسخة النهائية نموذج العمل الخاص بالتقييم وآلية تحديد مبادرات التحسين والتوصيات ومتابعتها</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إطار ثقافة الأداء وأدوات القياس ونموذج العمل المحدث</div><div class="ms-item"><span class="ms-dot"></span>الإطلاق التجريبي لقياس ثقافة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من نموذج عمل التقييم وآلية تحديد مبادرات التحسين والتوصيات ومتابعتها</div><div class="ms-item"><span class="ms-dot"></span>تحديد متطلبات الأعمال لأتمتة عمليات تقييم ثقافة الأداء</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (5)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقرير دراسة وتحليل الوضع الراهن لمفاهيم وأبعاد ثقافة الأداء</td>
+          <td class="budget-col">1.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>تقرير دراسات المقارنات المعيارية لمفاهيم وأبعاد ثقافة الأداء</td>
+          <td class="budget-col">1.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>تقرير تحليل الفجوات لمفاهيم وأبعاد ثقافة الأداء</td>
+          <td class="budget-col">640 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>إطار مفاهيم وأبعاد ثقافة الأداء وأداة القياس</td>
+          <td class="budget-col">6.4 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>نموذج عمل التقييم وآلية تحديد مبادرات التحسين والتوصيات ومتابعتها</td>
+          <td class="budget-col">3.2 م.ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 3 -->
+    <div class="slide" id="slide-ini-3">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">03. مشاركة المعرفة</div>
+      </div>
+      <div class="header-sub">ACS-SIC.01.PM.SP.04 &nbsp;|&nbsp; إدارة الشراكات الاستراتيجية &nbsp;|&nbsp; مالك المبادرة: محمد العوين</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">12</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">5</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">2 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2026-04-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2026-11-30</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكّن لمنظومة الأداء</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تطوير آلية متكاملة لمشاركة المعرفة عبر تصميم الأدوات والسياسات المناسبة، مع تبني أفضل الممارسات العالمية. تشمل المبادرة آليات تحفيزية وخطة تنفيذ شاملة لضمان الاستدامة، وتعزيز التعاون لتحقيق الاستخدام الأمثل للمعلومات.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">مشاركة المعرفة</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2026-04-01</td>
+          <td class="center-col">2026-11-30</td>
+          <td class="budget-col">2 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (12)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من دراسة أفضل الممارسات العالمية في تطبيق أطر مشاركة المعرفة بين الأجهزة وآليات التحفيز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من وثيقة آليات التحفيز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير النسخة الأولية من الأدوات والنماذج والأدلة الفنية</div><div class="ms-item"><span class="ms-dot"></span>عقد ورشة عمل لمراجعة الأدوات والنماذج الأولية مع أصحاب المصلحة المعنيين</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من المراجعة الشاملة للأدوات والنماذج الأولية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إطلاق النسخة النهائية للأدوات والنماذج</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من خطة تنفيذ آليات التحفيز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطبيق المرحلة التجريبية لآليات مشاركة المعرفة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد تقرير تقييم المرحلة التجريبية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد النسخة الأولية من نموذج عمل برامج وقنوات مشاركة المعرفة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد ورشة عمل لتطوير النسخة الأولية لنموذج عمل برامج وقنوات مشاركة المعرفة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير نموذج عمل برامج وقنوات مشاركة المعرفة</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (5)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقرير دراسات المقارنات المعيارية في تطبيق أطر مشاركة المعرفة بين الأجهزة</td>
+          <td class="budget-col">400 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>وثيقة آليات التحفيز للأجهزة العامة</td>
+          <td class="budget-col">400 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>الأدوات والنماذج والأدلة الفنية</td>
+          <td class="budget-col">400 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>وثيقة خطة التنفيذ لآليات التحفيز للأجهزة العامة</td>
+          <td class="budget-col">400 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>نموذج عمل برامج وقنوات مشاركة المعرفة بين الأجهزة</td>
+          <td class="budget-col">400 ألف ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 4 -->
+    <div class="slide" id="slide-ini-4">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">04. تطوير قدرات الموظفين الحكوميين في إدارة الأداء ورفع الوعي بها</div>
+      </div>
+      <div class="header-sub">ACS-SIC.01.PM.SP.02 &nbsp;|&nbsp; إدارة الشراكات الاستراتيجية &nbsp;|&nbsp; مالك المبادرة: قبال التميمي</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">15</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">10</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">13.2 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2026-04-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2026-12-30</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكّن لمنظومة الأداء</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تعزيز كفاءة موظفي الجهات الحكومية في إدارة الأداء عبر تطوير حلول استراتيجية. تشمل تحليل الفجوات المهارية، وتصميم دليل للمهارات والجدارات، وإعداد مصفوفة مهارات لتوجيه التدريب. وتطوير محتوى تدريبي ومنظومة متكاملة لإدارة التدريب، مع آليات تضمن استدامة الحلول ومواءمتها لاحتياجات الجهات.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">مشروع تطوير قدرات الموظفين الحكوميين في إدارة الأداء</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2026-04-01</td>
+          <td class="center-col">2026-12-30</td>
+          <td class="budget-col">13.2 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (15)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من جمع نتائج الاستبانات والمقابلات مع الموظفين المختارين</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحليل الوضع الراهن للكفاءات والمهارات لدى الموظفين في الأجهزة العامة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من المقارنة المعيارية للمهارات الفنية والجدارات السلوكية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحليل الفجوات للكفاءات والمهارات لدى موظفين</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير دليل شامل للمهارات الفنية المرتبطة بإدارة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير دليل شامل للجدارات السلوكية المرتبطة بإدارة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الإطار عمل شامل لإدارة التدريب والتطوير</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد الدليل الشامل (للمهارات الفنية والجدارات السلوكية) بما يتضمن مصفوفة مهارات شاملة توضح المهارات المطلوبة حسب المستويات الوظيفية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد المواد التدريبية ذات الصلة بالمهارات الفنية والجدارات السلوكية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من العمليات والإجراءات اللازمة لضمان فعالية تطبيق الحلول التدريبية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير نموذج تشغيلي لإدارة التدريب والتطوير</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المواد التدريبية ذات الصلة بالمهارات الفنية والجدارات السلوكية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد المتطلبات اللازمة لتطبيق الحلول في نظام إدارة التعليم والتدريب ضمن الأجهزة العامة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الإطار الشامل للمحتويات التدريبية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد خارطة طريق لتعميم وتطبيق الدليل شامل للجدارات السلوكية المرتبطة بإدارة الأداء</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (10)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقرير تقييم الوضع الراهن لتحليل الكفاءات الحالية في إدارة الأداء</td>
+          <td class="budget-col">660 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>وثيقة المقارنة المعيارية للمهارات 
+الفنية والجدارات السلوكية</td>
+          <td class="budget-col">660 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>تقرير تحليل الفجوات</td>
+          <td class="budget-col">660 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>الدليل الشامل للمهارات الفنية والجدارات السلوكية</td>
+          <td class="budget-col">1.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>إطار عمل شامل لإدارة التدريب والتطوير</td>
+          <td class="budget-col">1.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">6</td>
+          <td>وثائق المواد التدريبية لتطوير قدرات الموظفين في إدارة الأداء</td>
+          <td class="budget-col">2 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">7</td>
+          <td>نموذج تشغيلي لإدارة التدريب والتطوير</td>
+          <td class="budget-col">1.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">8</td>
+          <td>وثيقة المتطلبات اللازمة لتطبيقها في نظام لإدارة التعليم والتدريب للأجهزة العامة</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">9</td>
+          <td>الإطار الشامل للمحتويات التدريبية</td>
+          <td class="budget-col">2 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">10</td>
+          <td>خارطة الطريق لتعميم وتطبيق الدليل الشامل للمهارات الفنية والجدارات السلوكية</td>
+          <td class="budget-col">1.3 م.ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 5 -->
+    <div class="slide" id="slide-ini-5">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">05. تطوير معايير نشر بيانات الأداء لتعزيز مستوى الشفافية والموثوقية والتنافسية</div>
+      </div>
+      <div class="header-sub">ACS-SIC.01.PM.PM.03 &nbsp;|&nbsp; إدارة الأداء &nbsp;|&nbsp; مالك المبادرة: ريان التركي</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">11</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">5</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">صفري</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2024-07-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2025-07-01</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكّن لمنظومة الأداء</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تطوير معايير وحوكمة لنشر بيانات الأداء الحكومي لتعزيز التنافسية والشفافية والموثوقية. يشمل الإطار معايير النشر، دوريته، تحليل المخاطر وخطط معالجتها، إضافة إلى تطوير معيار لقياس جودة البيانات المنشورة.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">مشروع تطوير معايير نشر بيانات الأداء لتعزيز مستوى الشفافية والموثوقية والتنافسية</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2024-07-01</td>
+          <td class="center-col">2025-07-01</td>
+          <td class="budget-col">صفري</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (11)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من جمع المعلومات وتحليل الوضع الراهن لنشر البيانات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد الفجوات أو التحديات التي تواجهها الجهات الحكومية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد نطاق المعايير يضمن ذلك تحديد الأبعاد التي ستشملها البيانات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد المسودة الأولى للمعايير</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة الأولى ومشاركتها مع الجهات المختارة وجمع الملاحظات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة الثانية للمعايير وعكس الملاحظات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد وتحليل المخاطر المرتبطة بنشر البيانات وتطوير استراتيجيات لتقليل المخاطر</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير أدوات لقياس جودة البيانات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من وضع جدول زمني لتنفيذ المعايير</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تنفيذ نشر بيانات الأداء في بعض الأجهزة الحكومية بشكل تجريبي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقييم الأداء بعد التنفيذ التجريبي والبحث عن فرص تحسينية بناءً على التقييم</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (5)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقرير تقييم الوضع الراهن</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>نسخة اولى  لمعايير النشر والحوكمة</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>تقرير ملاحظات الجهات</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>النسخة النهائية لمعايير وحوكمة نشر البيانات</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>وثيقة معتمدة لمعايير وحوكمة النشر الحكومية</td>
+          <td class="budget-col">—</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 6 -->
+    <div class="slide" id="slide-ini-6">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">06. تطوير تحليل الأداء القائم على البيانات وذكاء الأعمال</div>
+      </div>
+      <div class="header-sub">ACS-SIC.02.PM.PM.06 &nbsp;|&nbsp; إدارة الأداء &nbsp;|&nbsp; مالك المبادرة: وجد العمار</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">2</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">15</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">9</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">25.6 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2025-08-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2028-08-01</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكّن لمنظومة الأداء</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تصميم وتنفيذ نموذج تشغيلي لتحليل البيانات في المركز، من خلال تقييم الوضع الراهن، تطوير حالات استخدام مخصصة، وتحليل الفجوات التقنية والتنظيمية. تشمل المبادرة بناء المنصة التحليلية وتكاملها مع مستودع البيانات، بالإضافة إلى تقديم التدريب والدعم الفني لضمان استدامة الحلول، وتنظيم ورش عمل مع جهات خارجية لتعزيز التكامل وتحديد متطلبات الأعمال.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (2)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">تصميم وتنفيذ النموذج التشغيلي للإدارة التنفيذية لتحليل الأداء</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2025-08-01</td>
+          <td class="center-col">2027-02-01</td>
+          <td class="budget-col">16.1 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td class="name-col">بناء المنصة التحليلية</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2028-01-01</td>
+          <td class="center-col">2028-08-01</td>
+          <td class="budget-col">9.5 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (15)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير دراسة الوضع الراهن لإدارة تحليل الأداء ولإمكانيات البيانات Data Potential Assessment</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحليل دراسة المقارنات المعيارية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحليل الفجوات وتحديد الاحتياجات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد العمليات والأدوار في النموذج التشغيلي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد الأدوات وآليات العمل في النموذج التشغيلي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد وثيقة النموذج التشغيلي النهائية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد النسخة الأولية لدليل النموذج التشغيلي للإدارة التنفيذية لتحليل الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد النسخة النهائية لدليل النموذج التشغيلي للإدارة التنفيذية لتحليل الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من نقل المعرفة لموظفي المركز فيما يخص كافة مكونات النموذج التشغيلي المحدث</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تنفيذ ورش عمل عصف ذهني بالتعاون مع الجهات الخارجية المختارة</div><div class="ms-item"><span class="ms-dot"></span>تنفيذ وتفعيل العمليات التشغيلية للإدارة التنفيذية لتحليل الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير متطلبات الأعمال لتطبيق الأدوات في مستودع البيانات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تصميم المنصة التحليلية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إضافة أساليب الذكاء الاصطناعي لدعم أعمال المنصة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من اختبارات الاستخدام للمنصة</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (9)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقرير دراسة وتحليل الوضع الراهن وإمكانيات البيانات</td>
+          <td class="budget-col">807 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>تقرير دراسة المقارنات المعيارية واستخلاص أفضل الممارسات العالمية في إدارات تحليل الأداء</td>
+          <td class="budget-col">807 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>تحليل الفجوات وتحديد الاحتياجات</td>
+          <td class="budget-col">807 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>وثيقة بناء وتصميم النموذج التشغيلي</td>
+          <td class="budget-col">3.2 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>دليل النموذج التشغيلي للإدارة التنفيذية لتحليل الأداء</td>
+          <td class="budget-col">1.6 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">6</td>
+          <td>تقرير ورش عمل عصف ذهني</td>
+          <td class="budget-col">807 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">7</td>
+          <td>تقارير تنفيذ وتفعيل العمليات التشغيلية للإدارة التنفيذية لتحليل الأداء (30 تقرير)</td>
+          <td class="budget-col">7.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">8</td>
+          <td>تقرير متطلبات الأعمال لتطبيق الأدوات في مستودع البيانات</td>
+          <td class="budget-col">807 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">9</td>
+          <td>المنصة التحليلية</td>
+          <td class="budget-col">9.5 م.ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 7 -->
+    <div class="slide" id="slide-ini-7">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">07. تطوير نظام مركزي موحد لقياس وإدارة الأداء</div>
+      </div>
+      <div class="header-sub">ACS-SIC.02.SS.IT.07 &nbsp;|&nbsp; تقنية الأعمال &nbsp;|&nbsp; مالك المبادرة: نوف السبيعي</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">14</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">3</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">75 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2027-01-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2028-09-01</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكّن لمنظومة الأداء</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تطوير نظام مركزي موحد لقياس الأداء وتحليله، وضمان الجودة، وأتمتة عمليات تحسين الأداء في المركز. يتضمن ذلك تحليل الوضع الراهن، تقييم الأنظمة الحالية، ودراسة التكامل بين الجهات المعنية. سيتم اختيار خيارات الاستضافة المناسبة للنظام، سواء سحابية أو على خوادم متقدمة، لضمان الأمان والقابلية للتوسع. سيشمل النظام مستودع بيانات مركزي لتوحيد البيانات وتحسين الامتثال والجودة، مع دعم أتمتة العمليات وتحسين إدارة الأداء. كما يتضمن النظام آليات لرفع التذاكر وإدارة علاقات المستفيدين لتعزيز التفاعل وتحسين تجربة المستخدم.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">مشروع تطوير نظام مركزي موحد لقياس وإدارة الأداء</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2027-01-01</td>
+          <td class="center-col">2028-09-30</td>
+          <td class="budget-col">75 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (14)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إجراءات الطرح والتعاقد</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من دراسة الوضع الراهن</div><div class="ms-item"><span class="ms-dot"></span>اعتماد وثيقة متطلبات الأعمال من أصحاب المصلحة ويشمل ذلك الجهات ذات العلاقة</div><div class="ms-item"><span class="ms-dot"></span>اعتماد وثيقة المواصفات التقنية</div><div class="ms-item"><span class="ms-dot"></span>اعتماد خطة تنفيذ المنصة</div><div class="ms-item"><span class="ms-dot"></span>تنفيذ عمليات قياس الأداء على المنصة</div><div class="ms-item"><span class="ms-dot"></span>تنفيذ عمليات قياس تجربة المستفيد</div><div class="ms-item"><span class="ms-dot"></span>تنفيذ عمليات قياس النضج</div><div class="ms-item"><span class="ms-dot"></span>تنفيذ عمليات التدريب</div><div class="ms-item"><span class="ms-dot"></span>تنفيذ أعمال إدارة العلاقات مع المستفيدين</div><div class="ms-item"><span class="ms-dot"></span>نقل البيانات من الأنظمة الحالية للنظام الموحد</div><div class="ms-item"><span class="ms-dot"></span>تصميم مستودع البيانات و أنابيب البيانات ولوحات الممعلومات والتقارير المؤتمتة</div><div class="ms-item"><span class="ms-dot"></span>تنفيذ مستودع البيانات و أنابيب البيانات ولوحات الممعلومات والتقارير المؤتمتة</div><div class="ms-item"><span class="ms-dot"></span>نقل البيانات الحالية لمستودع البيانات</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (3)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقرير تحليل الوضع الراهن</td>
+          <td class="budget-col">7.5 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>منصة النظام المركزي</td>
+          <td class="budget-col">45 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>مستودع البيانات والتقارير</td>
+          <td class="budget-col">22.5 م.ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 8 -->
+    <div class="slide" id="slide-ini-8">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">08. تحديث منهجيات قياس وإدارة الأداء</div>
+      </div>
+      <div class="header-sub">ACS-SIC.03.PM.PM.09 &nbsp;|&nbsp; إدارة الأداء &nbsp;|&nbsp; مالك المبادرة: فاطمة بن عميرة</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">2</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">18</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">7</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">23.2 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2025-06-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2026-01-30</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">منظّم إدارة الأداء في الأجهزة </div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تحديث منهجيات قياس وإدارة الأداء وتجربة المستفيد بما يتوافق مع الإطار الوطني والمعايير الرائدة. وتشمل تطوير نموذج تواصل وخارطة طريق للتفعيل، وتحسين جلسات مراجعة الأداء، ووضع معايير لتحديد الأجهزة منخفضة الأداء</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (2)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">مشروع تحديث منهجيات قياس وإدارة الأداء في الأجهزة العامة</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2025-06-01</td>
+          <td class="center-col">2026-01-30</td>
+          <td class="budget-col">15 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td class="name-col">مشروع تحديث منهجيات قياس تجربة المستفيد للأجهزة العامة والمؤشرات الاستراتيجية (1)</td>
+          <td><span class="badge badge-late2">متأخر جداً</span></td>
+          <td class="center-col">2025-06-01</td>
+          <td class="center-col">2025-12-01</td>
+          <td class="budget-col">8.2 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (18)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من عمليات التعاقد  لمشروع تحديث منهجية ومنهجيات قياس تجربة المستفيد للأجهزة العامة والمؤشرات الاستراتيجية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من عمليات التعاقد  لمشروع  تحديث منهجيات قياس وإدارة الأداء في الأجهزة العامة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من دراسة وتحليل الوضع الراهن وتحديد الفجوات والتحديات لمنهجيات قياس وإدارة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من دراسة وتحليل الوضع الراهن وتحديد الفجوات والتحديات لمنهجيات قياس تجربة المستفيد</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من دراسة وتحليل الوضع الراهن وتحديد الفجوات الحالية لإطار عمل جلسات المراجعة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء إجراء المقارنات المعيارية والتحليلات لأفضل الممارسات في قياس وإدارة الأداء</div><div class="ms-item"><span class="ms-dot"></span>إجراء المقارنات المعيارية والتحليلات لأفضل الممارسات في قياس تجربة المستفيد</div><div class="ms-item"><span class="ms-dot"></span>إجراء المقارنات المعيارية والتحليلات لأفضل الممارسات في إدارة ومراجعة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة الأولية لمنهجيات قياس وإدارة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة الأولية لمنهجيات قياس تجربة المستفيد</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من الدراسات المعيارية لمعايير تحديد الجهات ذات الأداء المنخفض</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من معايير وضوابط جلسات مراجعة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة النهائية لمنهجيات قياس وإدارة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من نموذج التواصل وخارطة الطريق لمنهجيات قياس تجربة المستفيد</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إطار العمل التشغيلي لقياس وإدارة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من نموذج التواصل وخارطة الطريق لمنهجيات تقديم جلسات مراجعة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من نموذج التواصل وخارطة الطريق لمنهجيات قياس وإدارة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من متطلبات الأعمال (BRD)بالمعايير المحدثة لتحديد الأجهزة</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (7)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>منهجيات محدثة لقياس وإدارة الأداء</td>
+          <td class="budget-col">4.6 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>منهجيات محدثة لقياس تجربة المستفيد</td>
+          <td class="budget-col">4.6 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>منهجيات محدثة لتقديم جلسات مراجعة الأداء</td>
+          <td class="budget-col">2.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>نموذج التواصل وخارطة الطريق لمنهجيات</td>
+          <td class="budget-col">3.5 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>نموذج التواصل وخارطة الطريق لمنهجيات قياس تجربة المستفيد</td>
+          <td class="budget-col">3.5 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">6</td>
+          <td>نموذج التواصل وخارطة الطريق لمنهجيات قياس وإدارة الأداء</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">7</td>
+          <td>متطلبات الأعمال(BRD) بالمعايير المحدثة لتحديد الأجهزة</td>
+          <td class="budget-col">1.2 م.ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 9 -->
+    <div class="slide" id="slide-ini-9">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">09. إدارة التغير ورفع الوعي بمتطلبات إدارة الأداء</div>
+      </div>
+      <div class="header-sub">ACS-SIC.03.PM.PM.08 &nbsp;|&nbsp; إدارة الأداء &nbsp;|&nbsp; مالك المبادرة: سلطان النويصر</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">2</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">11</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">4</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">1 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2026-04-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2026-12-01</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">منظّم إدارة الأداء في الأجهزة </div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تعزيز الوعي وإدارة التغيير في متطلبات إدارة الأداء لدى الأجهزة الحكومية من خلال تحليل الوضع الراهن، استكشاف أفضل الممارسات، وتحديد الفجوات لتحسين العمليات. تركز على تصميم رسائل وأدوات تواصل فعّالة لتعزيز الفهم والامتثال، مع تنظيم ورش عمل ومحاضرات لتنفيذ وإدارة التغيير، ومتابعة تقييم الأداء والتأثير.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (2)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">مشروع تصميم خطة تواصل إدارة التغيير</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2026-04-01</td>
+          <td class="center-col">2026-08-01</td>
+          <td class="budget-col">صفري</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td class="name-col">مشروع تنفيذ وإدارة التغيير</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2026-08-01</td>
+          <td class="center-col">2026-12-01</td>
+          <td class="budget-col">1 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (11)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>تحديد وتصنيف أصحاب المصلحة وتحديد احتياجات التواصل</div><div class="ms-item"><span class="ms-dot"></span>تحليل الأدوار والمسؤوليات لأصحاب المصلحة الرئيسيين</div><div class="ms-item"><span class="ms-dot"></span>تحديد أولويات التواصل مع أصحاب المصلحة بناءً على تأثيرهم واحتياجاتهم</div><div class="ms-item"><span class="ms-dot"></span>بناء مسودة أولية لخطة تواصل مفصلة (تتضمن الأهداف، الاستراتيجيات، القنوات، الجداول الزمنية، والمسؤوليات)</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من المسودة الأولية لخطة التواصل</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة النهائية لخطة التواصل بالتنسيق مع أصحاب المصلحة الرئيسيين</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير خطة التواصل النهائية والمفصلة (تتضمن جميع المكونات المعتمدة)</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير أدوات التواصل بناءً على الاحتياجات والفجوات المحددة في مرحلة التواصل</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد أجندة ورش العمل</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تنفيذ مرحلة تجريبية لخطة التواصل على مجموعة مختارة من الجهات المستهدفة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من عقد عدد من ورش عمل ومحاضرات لدعم تنفيذ خطة التواصل وإدارة التغيير</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (4)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>مصفوفة أصحاب المصلحة</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>خطة تواصل</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>أدوات التواصل والتنفيذ على الجهات المستهدفة</td>
+          <td class="budget-col">100 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>ورش عمل ومحاضرات تفاعلية مع الجهات المستهدفة</td>
+          <td class="budget-col">900 ألف ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 10 -->
+    <div class="slide" id="slide-ini-10">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">10. دعم تنفيذ قياس تجربة المستفيد</div>
+      </div>
+      <div class="header-sub">ACS-SIC.03.PM.BEX.11 &nbsp;|&nbsp; تجربة المستفيد &nbsp;|&nbsp; مالك المبادرة: بندر الجمعان</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">4</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">14</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">4</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">22.2 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-late2 badge-lg">متأخر جداً</span>
+            <span class="phase-tag">قيد التنفيذ</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2024-06-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2027-06-01</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">منظّم إدارة الأداء في الأجهزة </div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تحسين تجربة المستفيد ورفع رضا المواطنين عبر إنشاء آلية شاملة لقياس تجارب المستفيدين باستخدام أساليب متقدمة لجمع وتحليل البيانات. تركز المرحلة الأولى على قياس التجارب المحددة وتقديم دعم استشاري، مع تطوير تقارير أداء وطنية تشمل تحليلات وتقييمات مقارنة لتحديد نقاط القوة والضعف. في المراحل التالية، سيتم توسيع القياس ليشمل رحلتي الحج والعمرة الموسمية وغير الموسمية.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (4)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">مشروع الدعم الاستشاري لتنفيذ قياس تجربة المستفيد</td>
+          <td><span class="badge badge-late">متأخر</span></td>
+          <td class="center-col">2024-08-01</td>
+          <td class="center-col">2026-02-05</td>
+          <td class="budget-col">2.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td class="name-col">مشروع دعم تنفيذ عمليات قياس تجربة المستفيد المرحلة الأولى</td>
+          <td><span class="badge badge-late">متأخر</span></td>
+          <td class="center-col">2024-06-01</td>
+          <td class="center-col">2026-01-29</td>
+          <td class="budget-col">4.9 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td class="name-col">مشروع دعم تنفيذ عمليات قياس تجربة المستفيد المرحلة الثانية</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2025-06-01</td>
+          <td class="center-col">2026-06-01</td>
+          <td class="budget-col">7.5 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td class="name-col">مشروع دعم تنفيذ عمليات قياس تجربة المستفيد المرحلة الثالثة</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2026-06-01</td>
+          <td class="center-col">2027-06-01</td>
+          <td class="budget-col">7.5 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (14)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من دراسة الوضع الراهن لآليات قياس تجربة المستفيد</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد مدخلات نظام إدارة الأداء الخاصة بقياس تجربة المستفيد</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد الفجوات والتحديات وإعداد خطة مفصلة لمراجعة وتحديث الآليات القائمة</div><div class="ms-item"><span class="ms-dot"></span>الانهاء من بناء آلية لتصميم مؤشر الرضا على مستوى جهاز عام CSI لوضع المستهدفات ومتابعة خطط التحسين</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من بناء آلية قياس تجربة المستفيدين عبر الرحلات والخدمات المحددة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد وثائق استرشادية لعملية اختيار الأدوات والاستبانات المستخدمة في القياس</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تصميم العينات الإحصائية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد آلية تطبيق الاختبارات التجريبية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد خطة التنفيذ والتقارير الدورية لمتابعة عملية القياس ومؤشرات الأداء الأساسية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد آلية لفحص جودة البيانات وأساليب معالجتها</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تنفيذ عمليات قياس تجربة المستفيد</div><div class="ms-item"><span class="ms-dot"></span>استلام المخرجات النهائية ( تقارير الأداء الوطنية الشاملة) المرحلة الأولى</div><div class="ms-item"><span class="ms-dot"></span>استلام المخرجات النهائية ( تقارير الأداء الوطنية الشاملة) المرحلة الثانية</div><div class="ms-item"><span class="ms-dot"></span>استلام المخرجات النهائية ( تقارير الأداء الوطنية الشاملة) المرحلة الثالثة</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (4)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>دعم تنفيذ قياس تجربة المستفيدين عبر الرحلات والخدمات المحددة</td>
+          <td class="budget-col">2.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>تقارير الأداء الوطني الشاملة  (المرحلة الأولى)</td>
+          <td class="budget-col">4.9 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>تقارير الأداء الوطني الشاملة  (المرحلة الثانية)</td>
+          <td class="budget-col">7.5 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>تقارير الأداء الوطني الشاملة  (المرحلة الثالثة)</td>
+          <td class="budget-col">7.5 م.ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 11 -->
+    <div class="slide" id="slide-ini-11">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">11. تطوير منهجية ضمان جودة الأداء</div>
+      </div>
+      <div class="header-sub">ACS-SIC.04.PM.PM.12 &nbsp;|&nbsp; إدارة الأداء &nbsp;|&nbsp; مالك المبادرة: محمد الجماز</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">10</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">6</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">6.9 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2026-04-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2026-10-01</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">مسؤول قياس الأداء على المستوى </div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تطوير منهجية متكاملة لضمان جودة الأداء بما يتماشى مع أدوار المركز المحدثة والإطار الوطني لإدارة الأداء. تبدأ بدراسة الوضع الراهن وتحليل الفجوات، يليها إجراء مقارنات معيارية لتحديد أفضل الممارسات. بعد ذلك، يتم تصميم منهجية شاملة وإعداد وثيقة متطلبات الأعمال لتطبيقها في النظام المركزي الموحد. تُختتم المبادرة بوضع خطة تنفيذية ودليل تشغيل لضمان تطبيق المنهجية واستدامتها.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">مشروع تطوير منهجية ضمان الجودة</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2026-04-01</td>
+          <td class="center-col">2026-10-01</td>
+          <td class="budget-col">6.9 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (10)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من عقد اجتماعات وورش عمل أصحاب المصلحة الرئيسيين</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من دراسة وتحليل الوضع الراهن لممارسات ضمان الجودة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إجراء المقارنات المعيارية والتحليلات لأفضل الممارسات في ضمان الجودة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير تحليل الفجوات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من التصور الأولي لمنهجية ضمان جودة الأداء</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من المنهجية الشاملة لضمان جودة الأداء</div><div class="ms-item"><span class="ms-dot"></span>حصر ومواءمة  متطلبات تطبيق منهجية الجودة الشاملة في النظام المركزي الموحد</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من وثيقة متطلبات الأعمال لتطبيقها في النظام المركزي الموحد</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من مسودة خطة تفعيل المنهجية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من خطة التفعيل للمنهجية</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (6)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقرير دراسة وتحليل الوضع الراهن لمنهجية ضمان جودة الأداء بالمركز</td>
+          <td class="budget-col">686 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>تقرير دراسات المقارنات المعيارية لمنهجية ضمان جودة الأداء بالمركز</td>
+          <td class="budget-col">686 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>تقرير تحليل الفجوات لمنهجية ضمان جودة الأداء بالمركز</td>
+          <td class="budget-col">686 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>منهجية شاملة لضمان جودة الأداء في المركز</td>
+          <td class="budget-col">2.1 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>وثيقة متطلبات الأعمال للنظام المركزي</td>
+          <td class="budget-col">1.4 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">6</td>
+          <td>خطة التفعيل للمنهجية</td>
+          <td class="budget-col">1.4 م.ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 12 -->
+    <div class="slide" id="slide-ini-12">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">12. مبادرة تحقيق الأداء المنضبط</div>
+      </div>
+      <div class="header-sub">ACS-SIE.06.GRC.GRC.18 &nbsp;|&nbsp; إدارة الحوكمة والمخاطر والالتزام &nbsp;|&nbsp; مالك المبادرة: ماجد العجمي</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">0</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">0</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">صفري</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-complete badge-lg">مكتمل</span>
+            <span class="phase-tag">الإغلاق</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2024-01-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2024-12-31</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكنات</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text"></div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">تحقيق الأداء المنضبط</td>
+          <td><span class="badge badge-complete">مكتمل</span></td>
+          <td class="center-col">2024-01-01</td>
+          <td class="center-col">2024-12-31</td>
+          <td class="budget-col">صفري</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (0)</div>
+              <div class="miles-list"><div class="empty-note">لا توجد معالم مسجلة</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (0)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody><tr><td colspan="3" class="empty-note">لا توجد مخرجات مسجلة</td></tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 13 -->
+    <div class="slide" id="slide-ini-13">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">13. دعم وتفعيل قياس وإدارة أداء الاستراتيجيات المؤسسية</div>
+      </div>
+      <div class="header-sub">ACS-SIE.06.PM.PM.17 &nbsp;|&nbsp; إدارة الأداء &nbsp;|&nbsp; مالك المبادرة: سلطان النويصر</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">3</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">10</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">3</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">26.7 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2025-05-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2028-12-31</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكنات</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تفعيل قياس وإدارة أداء الاستراتيجيات الوطنية والأداء المؤسسي .تتضمن المبادرة تفعيل المنهجيات المحدثة من خلال إعداد تقارير ودراسات لقياس الاستراتيجيات الوطنية والأداء المؤسسي في القطاعات المستهدفة، مثل (النقل، الصناعة، الطاقة، الصحة إلخ).</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (3)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">دعم وتفعيل قياس وإدارة أداء الاستراتيجيات الوطنية والأداء المؤسسي (المرحلة الأولى)</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2025-05-01</td>
+          <td class="center-col">2026-12-31</td>
+          <td class="budget-col">12.2 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td class="name-col">دعم وتفعيل قياس وإدارة أداء الاستراتيجيات الوطنية والأداء المؤسسي (المرحلة الثانية)</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2026-12-31</td>
+          <td class="center-col">2027-12-31</td>
+          <td class="budget-col">7.2 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td class="name-col">دعم وتفعيل قياس وإدارة أداء الاستراتيجيات الوطنية والأداء المؤسسي (المرحلة الثالثة)</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2027-12-31</td>
+          <td class="center-col">2028-12-31</td>
+          <td class="budget-col">صفري</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (10)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الدفعة الأولى لتقارير ودراسات قياس أداء المرحلة الأولى</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الدفعة الثانية لتقارير ودراسات قياس أداء المرحلة الأولى</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الدفعة الثالثة لتقارير ودراسات قياس أداء المرحلة الأولى</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الدفعة الرابعة لتقارير ودراسات قياس أداء المرحلة الأولى</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الدفعة الأولى لتقارير ودراسات قياس أداء المرحلة الثانية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الدفعة الثانية لتقارير ودراسات قياس أداء المرحلة الثانية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الدفعة الثالثة لتقارير ودراسات قياس أداء المرحلة الثانية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الدفعة الأولى لتقارير ودراسات قياس أداء المرحلة الثالثة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الدفعة الثانية لتقارير ودراسات قياس أداء المرحلة الثالثة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير الدفعة الرابعة لتقارير ودراسات قياس أداء المرحلة الثالثة</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (3)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقارير المرحلة الأولى</td>
+          <td class="budget-col">12.2 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>تقارير المرحلة الثانية</td>
+          <td class="budget-col">7.3 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>تقارير المرحلة الثاالثة</td>
+          <td class="budget-col">7.3 م.ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 14 -->
+    <div class="slide" id="slide-ini-14">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">14. تفصيل الهيكل التنظيمي المقترح والنموذج التشغيلي</div>
+      </div>
+      <div class="header-sub">ACS-SIE.06.SS.HR.21 &nbsp;|&nbsp; الموارد البشرية &nbsp;|&nbsp; مالك المبادرة: ممدوح عبدالرحيم</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">18</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">8</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">4 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-complete badge-lg">مكتمل</span>
+            <span class="phase-tag">قيد التنفيذ</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2024-11-27</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2025-08-31</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكنات</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تحسين النموذج التشغيلي للمركز من خلال تطوير الهيكل التنظيمي بما يحقق تبسيط العمليات وتقليل التكرار، وتعزيز الكفاءة التشغيلية الشاملة وتطوير منهجية تقييم الوظائف والأوزان الوظيفية. كما تسعى المبادرة إلى مواءمة الهيكل التنظيمي مع الأهداف الاستراتيجية للمركز، لضمان دعم رؤيته ورسالته وأهدافه. تشمل المبادرة أيضاً تطوير وتنمية المواهب الداخلية وضمان استدامة الأداء والفعالية على المدى الطويل.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">تفصيل الهيكل التنظيمي وتحسين ممارسات الموارد البشرية</td>
+          <td><span class="badge badge-late2">متأخر جداً</span></td>
+          <td class="center-col">2024-11-27</td>
+          <td class="center-col">2025-11-30</td>
+          <td class="budget-col">4 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (18)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>انتهاء من عمليات التعاقد  لمشروع تفصيل الهيكل التنظيمي المقترح والنموذج التشغيلي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من مراجعة وتحليل الوثائق المستلمة من المركز لفهم السياق الاستراتيجي والوضع الحالي، بالإضافة إلى مراجعة الهيكل التنظيمي المستحدث والبيان الوظيفي لكل إدارة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إجراء مقابلة شخصية مع أصحاب المصلحة لجمع المزيد من المعلومات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من فهم الوضع الراهن وتطوير التقرير</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة الأولية للهيكل التنظيمي دون المستوى الأول والثاني وبيان وظيفي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة النهائية للهيكل التنظيمي دون المستوى الأول والثاني وبيان وظيفي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة الأولية للهيكل الإداري الوظيفي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة النهائية للهيكل الإداري الوظيفي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة الأولية للعوائل الوظيفية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة النهائية للعوائل الوظيفية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة الأولية لسياسة الوزن الوظيفي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة النهائية لسياسة الوزن الوظيفي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة الأولية لدليل مسارات وظيفية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة النهائية لدليل مسارات وظيفية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة الأولية لأوصاف وظيفية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة النهائية لأوصاف وظيفية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة الأولية لخطة نقل الموظفين على الهيكل الوظيفي المستحدث</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة النهائية لخطة نقل الموظفين على الهيكل الوظيفي المستحدث</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (8)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقرير دراسة الوضع الراهن</td>
+          <td class="budget-col">600 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>هيكل تنظيمي دون المستوى الأول والثاني وبيان وظيفي معتمد</td>
+          <td class="budget-col">600 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>هيكل إداري وظيفي معتمد</td>
+          <td class="budget-col">600 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>عوائل وظيفية معتمدة</td>
+          <td class="budget-col">440 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>سياسة معتمدة للوزن الوظيفي</td>
+          <td class="budget-col">440 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">6</td>
+          <td>دليل مسارات وظيفية معتمد</td>
+          <td class="budget-col">440 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">7</td>
+          <td>أوصاف وظيفية معتمدة</td>
+          <td class="budget-col">440 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">8</td>
+          <td>خطة معتمدة لنقل الموظفين على الهيكل الوظيفي المستحدث</td>
+          <td class="budget-col">440 ألف ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 15 -->
+    <div class="slide" id="slide-ini-15">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">15. استراتيجية الموارد البشرية</div>
+      </div>
+      <div class="header-sub">ACS-SIE.06.SS.HR.14 &nbsp;|&nbsp; الموارد البشرية &nbsp;|&nbsp; مالك المبادرة: ممدوح عبدالرحيم</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">13</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">9</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">2 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-late2 badge-lg">متأخر جداً</span>
+            <span class="phase-tag">قيد التنفيذ</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2024-11-27</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2025-09-30</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكنات</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تحسين كفاءة وفعالية عمليات الموارد البشرية من خلال تطوير تخطيط التعاقب الوظيفي، وإدارة بيانات الموظفين وخدماتهم، وتعزيز إدارة الرواتب والتعويضات. كما تركز على استقطاب المواهب وتهيئتهم، وتحسين إدارة المواهب، والاستفادة المثلى من القوى العاملة. تشمل المبادرة أيضًا مراجعة نظام إدارة الأداء، وتخطيط المسارات الوظيفية، وتخطيط التعاقب الوظيفي والمحافظة على رأس المال البشري لخلق بيئة عمل محفزة ومستدامة.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">استراتيجية الموارد البشرية</td>
+          <td><span class="badge badge-late2">متأخر جداً</span></td>
+          <td class="center-col">2024-11-27</td>
+          <td class="center-col">2025-11-30</td>
+          <td class="budget-col">2 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (13)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>انتهاء من عمليات التعاقد  لمشروع استراتيجية الموارد البشرية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من الفهم الأولي وتحليل الوضع الراهن لتقييم ممارسات الموارد البشرية الحالية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير تقرير يوضح نقاط القوة وفرص التحسين للوضع الراهن لممارسات الموارد البشرية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة الأولية للهيكل التنظيمي للموارد البشرية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير المسودة النهائية للهيكل التنظيمي للموارد البشرية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير وثيقة الإطار التشغيلي لإدارة الموارد البشرية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير النسخة الأولية لاستراتيجية الموارد البشرية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير النسخة النهائية لاستراتيجية الموارد البشرية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير خارطة الطريق لمبادرات الموارد البشرية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير خطط لتعزيز الارتباط الوظيفي وتعزيز الصورة المؤسسية للمركز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير استراتيجية استقطاب المواهب والمحافظة عليهم</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير خطط واستراتيجيات التعاقب الوظيفي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديث سياسات وإجراءات الموارد البشرية</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (9)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقرير يوضح نقاط القوة والضعف وفرص التحسين للوضع الراهن لممارسات الموارد البشرية</td>
+          <td class="budget-col">200 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>الهيكل التنظيمي للموارد البشرية</td>
+          <td class="budget-col">300 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>الإطار التشغيلي لإدارة الموارد البشرية</td>
+          <td class="budget-col">200 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>استراتيجية الموارد البشرية</td>
+          <td class="budget-col">300 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>خارطة الطريق لمبادرات الموارد البشرية</td>
+          <td class="budget-col">200 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">6</td>
+          <td>خطط لتعزيز الارتباط الوظيفي وتعزيز الصورة المؤسسية للمركز</td>
+          <td class="budget-col">200 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">7</td>
+          <td>استراتيجية استقطاب المواهب والمحافظة عليهم</td>
+          <td class="budget-col">200 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">8</td>
+          <td>خطط واستراتيجيات التعاقب الوظيفي</td>
+          <td class="budget-col">200 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">9</td>
+          <td>سياسات وإجراءات الموارد البشرية المحدثة</td>
+          <td class="budget-col">200 ألف ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 16 -->
+    <div class="slide" id="slide-ini-16">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">16. تقييم وتحسين الثقافة المؤسسية</div>
+      </div>
+      <div class="header-sub">ACS-SIE.06.SS.HR.16 &nbsp;|&nbsp; الموارد البشرية &nbsp;|&nbsp; مالك المبادرة: ممدوح عبدالرحيم</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">10</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">4</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">صفري</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-late2 badge-lg">متأخر جداً</span>
+            <span class="phase-tag">ما قبل البدء</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2025-06-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2026-06-01</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكنات</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تحسين الثقافة التنظيمية في المركز من خلال تقييم شامل للواقع الحالي يركز على القيم والسلوكيات والممارسات السائدة. بناءً على هذا التقييم، سيتم تصميم إطار عمل يعكس الثقافة المستهدفة ويرسخ القيم الجديدة التي تعزز الأداء والانسجام التنظيمي، مع تطوير أدوات ومعايير لقياس أثر تطبيق هذه القيم. تتضمن المبادرة أيضاً وضع خطة عمل تدعم تنفيذ الإطار الثقافي الجديد، مع التركيز على إشراك القيادة في عملية التحول من خلال برنامج "رواد التغيير الثقافي". يهدف هذا البرنامج إلى تمكين القيادات من تجسيد القيم المستهدفة وتوجيه فرقهم نحو تحقيق التغيير المطلوب بشكل عملي ومستدام.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">تقييم وتحسين الثقافة المؤسسية</td>
+          <td><span class="badge badge-on-track">على المسار</span></td>
+          <td class="center-col">2025-06-01</td>
+          <td class="center-col">2026-06-01</td>
+          <td class="budget-col">صفري</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (10)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تنفيذ الاستبانات وورش العمل لتحليل ثقافة العمل الحالية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إجراء تحليل شامل لثقافة العمل الحالية داخل المركز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد تقرير مفصل عن القيم والعادات والسلوكيات السائدة وتحديد المجالات التي تحتاج إلى تحسين أو تعزيز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير نسخة أولية لإطار شامل يحدد السلوكيات والممارسات والأعراف التي يجب تشجيعها وترسيخها</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة النهائية لإطار العمل بعد مراجعات واعتمادات الجهات المعنية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من خطة تنفيذ مفصلة لتطبيق إطار الثقافة التنظيمية الجديدة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من إعداد النسخة الأولية لآليات مراقبة وتقييم فعالية جهود تعزيز الثقافة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة النهائية لآليات المراقبة والتقييم</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد رواد التغيير الثقافي ضمن فريق القيادة في المركز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من اعتماد رواد التغيير الثقافي وتجهيزهم لجمع الملاحظات من فرقهم</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (4)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقرير تقييم الوضع الراهن للثقافة التنظيمية</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>إطار عمل لتعزيز ثقافة المنظمة بما في ذلك القيم التنظيمية</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>خطة تحسين مفصلة لتنفيذ إطار الثقافة الجديد وتقارير المتابعة</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>برنامج رواد التغيير الثقافي بما في ذلك اعتماد رواد التغيير  ضمن فريق القيادة في المركز</td>
+          <td class="budget-col">—</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 17 -->
+    <div class="slide" id="slide-ini-17">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">17. دعم تنفيذ الاستراتيجية</div>
+      </div>
+      <div class="header-sub">ACS-SIE.07.TMO.SMO.22 &nbsp;|&nbsp; إدارة الاستراتيجية المؤسسية &nbsp;|&nbsp; مالك المبادرة: طلال السبيعي</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">16</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">11</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">14 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-late2 badge-lg">متأخر جداً</span>
+            <span class="phase-tag">قيد التنفيذ</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2024-09-15</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2025-09-15</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكنات</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تصميم وحدة متكاملة تعنى بمتابعة تنفيذ الاستراتيجية وإدارة الأداء. تشمل الوحدة أيضًا إدارة المشاريع المتعلقة بتنفيذ مبادرات الاستراتيجية في المركز. كما تتضمن المبادرة متابعة تقدم المبادرات المخطط لها، رصد المخاطر والمعوقات، التعامل مع طلبات التغيير، وتوفير تقارير دورية شاملة حول حالة التقدم والإنجاز في المشاريع المختلفة، لضمان تحقيق الأهداف الاستراتيجية.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">مشروع دعم تنفيذ الاستراتيجية</td>
+          <td><span class="badge badge-late2">متأخر جداً</span></td>
+          <td class="center-col">2024-09-15</td>
+          <td class="center-col">2025-12-16</td>
+          <td class="budget-col">8.7 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (16)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير التقرير النهائي للفهم الأولي وتحليل الوضع الراهن لمكتب إدارة التحول الإستراتيجي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تسليم المسودة النهائية لوثيقة النموذج التشغيلي لمكتب إدارة التحول الاستراتيجي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تسليم المسودة النهائية لوثيقة دليل مكتب إدارة التحول الاستراتيجي متضمناً دليل الإجراءات والخدمات والنماذج والقوالب</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تسليم المسودة النهائية لوثيقة تفصيل بطاقات المبادرات المعتمدة للاعتماد</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من الملف الموحّد لطلبات التغيير تمهيداً لرفعها لمجلس الإدارة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تسليم المسودة النهائية لوثيقة خارطة الطريق المفصلة للمبادرات الاستراتيجية للاعتماد</div><div class="ms-item"><span class="ms-dot"></span>تسليم المسودة الأولى من مخرج وثيقة خطة تنزيل الأهداف الاستراتيجية ومؤشرات الأداء إلى جميع المستويات الإدارية في المركز</div><div class="ms-item"><span class="ms-dot"></span>تسليم المسودة النهائية لمخرج وثيقة خطة تنزيل الأهداف الاستراتيجية ومؤشرات الأداء إلى جميع المستويات الإدارية في المركز للاعتماد</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تسليم المسودة النهائية لوثيقة خطة الطرح والتعاقد للمشاريع المتعلقة بتنفيذ الاستراتيجية</div><div class="ms-item"><span class="ms-dot"></span>تسليم المسودة الأولى من مخرج خطة تفعيل الحوكمة والإجراءات للمراجعة</div><div class="ms-item"><span class="ms-dot"></span>تسليم المسودة النهائية من مخرج خطة تفعيل الحوكمة والإجراءات للاعتماد</div><div class="ms-item"><span class="ms-dot"></span>تسليم المسودة الأولى من مخرج تقرير اكتمال تفعيل الحوكمة والإجراءات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من المسودة النهائية لتقرير اكتمال تفعيل الحوكمة والإجراءات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من خطة التواصل مع الجهات الخارجية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من التقارير الدورية عن حالة أداء الاستراتيجية وحالة تنفيذ المبادرات والبرامج والمشاريع متضمنة سجلات المخاطر والتحديات</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقارير الدعم الفني المقدمة من الخبراء الفنيين</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (11)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>وثيقة النموذج التشغيلي لمكتب إدارة تنفيذ الاستراتيجية</td>
+          <td class="budget-col">2.4 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>دليل مكتب إدارة التحول الاستراتيجي</td>
+          <td class="budget-col">1.5 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>تفصيل بطاقات المبادرات المعتمدة</td>
+          <td class="budget-col">2 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>خارطة الطريق المفصلة للمبادرات الاستراتيجية</td>
+          <td class="budget-col">700 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>خطة تنزيل الأهداف الاستراتيجية ومؤشرات الأداء إلى جميع المستويات الإدارية في المركز</td>
+          <td class="budget-col">700 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">6</td>
+          <td>خطة الطرح والتعاقد للمشاريع المتعلقة بتنفيذ الاستراتيجية</td>
+          <td class="budget-col">462 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">7</td>
+          <td>خطة تفعيل الحوكمة والإجراءات</td>
+          <td class="budget-col">700 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">8</td>
+          <td>تقرير اكتمال تفعيل الحوكمة والإجراءات</td>
+          <td class="budget-col">700 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">9</td>
+          <td>خطة التواصل مع الجهات الخارجية</td>
+          <td class="budget-col">700 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">10</td>
+          <td>التقارير الدورية عن حالة أداء الاستراتيجية وحالة تنفيذ المبادرات والبرامج والمشاريع متضمنة سجلات المخاطر والتحديات</td>
+          <td class="budget-col">2.8 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">11</td>
+          <td>تقارير الدعم الفني المقدمة من الخبراء الفنيين</td>
+          <td class="budget-col">1.4 م.ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 18 -->
+    <div class="slide" id="slide-ini-18">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">18. تعزيز التميز الحوكمي والمؤسسي في المركز من خلال تبني وتطبيق المعايير الوطنية والدولية</div>
+      </div>
+      <div class="header-sub">ACS-SIE.07.TMO.OE.20 &nbsp;|&nbsp; التميز المؤسسي &nbsp;|&nbsp; مالك المبادرة: رائد الوهيبي</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">7</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">14</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">7</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">2.8 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-late badge-lg">متأخر</span>
+            <span class="phase-tag">قيد التنفيذ</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2024-10-15</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2027-05-30</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكنات</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تحسين كفاءة وفعالية عمليات الموارد البشرية من خلال تطوير تخطيط التعاقب الوظيفي، وإدارة بيانات الموظفين وخدماتهم، وتعزيز إدارة الرواتب والتعويضات. كما تركز على استقطاب المواهب وتهيئتهم، وتحسين إدارة المواهب، والاستفادة المثلى من القوى العاملة. تشمل المبادرة أيضًا مراجعة نظام إدارة الأداء، وتخطيط المسارات الوظيفية، وتخطيط التعاقب الوظيفي والمحافظة على رأس المال البشري لخلق بيئة عمل محفزة ومستدامة.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (7)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">مشروع تحليل الوضع الراهن ومعالجة الفجوات لجائزة الملك عبدالعزيز للجودة</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2025-07-01</td>
+          <td class="center-col">2025-10-30</td>
+          <td class="budget-col">صفري</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td class="name-col">مشروع قياس مؤشر الثقافة المؤسسية OHBI لسنة 2024</td>
+          <td><span class="badge badge-complete">مكتمل</span></td>
+          <td class="center-col">2025-01-01</td>
+          <td class="center-col">2025-05-30</td>
+          <td class="budget-col">340 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td class="name-col">مشروع التدريب لموظفي المركز للمقيم الداخلي وفق نموذج جائزة الملك عبدالعزيز للجودة</td>
+          <td><span class="badge badge-complete">مكتمل</span></td>
+          <td class="center-col">2025-04-06</td>
+          <td class="center-col">2025-05-30</td>
+          <td class="budget-col">100 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td class="name-col">مشروع تأهيل المركز لتطبيق معايير ومواصفات ISO</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2025-07-01</td>
+          <td class="center-col">2026-01-01</td>
+          <td class="budget-col">1.6 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td class="name-col">مشروع قياس مؤشر الثقافة المؤسسية OHBI لسنة 2025</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2026-01-01</td>
+          <td class="center-col">2026-05-30</td>
+          <td class="budget-col">340 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">6</td>
+          <td class="name-col">مشروع التقييم الخارجي النهائي للمركز وفق معايير جائزة الملك عبدالعزيز للجودة</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2026-03-01</td>
+          <td class="center-col">2026-11-08</td>
+          <td class="budget-col">100 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">7</td>
+          <td class="name-col">مشروع قياس مؤشر الثقافة المؤسسية OHBI لسنة 2026</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2027-01-01</td>
+          <td class="center-col">2027-05-30</td>
+          <td class="budget-col">صفري</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (14)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من التقييم الذاتي للمركز فيما يخص معايير جائزة الملك عبدالعزيز للجودة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من الطرح والتعاقد لمشروع قياس مؤشر الثقافة المؤسسية OHBI  لقياس المؤشر لسنة 2024</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من اجراء تقييم OHBI  لسنة 2024</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من التدريب لموظفي المركز للمقيم الداخلي وفق نموذج جائزة الملك عبدالعزيز للجودة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من الطرح والتعاقد لمشروع مشروع تأهيل المركز لتطبيق معايير ومواصفات ISO</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقييم الوضع الراهن للتميز الحوكمي والمؤسسي في المركز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من الخطط التحسينية الداخلية لاستخراج شهادات ISO للتميز الحوكمي والمؤسسي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من معالجة الفجوات في معايير الجائزة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من الطرح والتعاقد لمشروع قياس مؤشر الثقافة المؤسسية OHBI  لقياس المؤشر لسنة 2025</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من استخراج شهادات ISO  المختصة في التميز الحوكمي والمؤسسي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من اجراء تقييم OHBI  لسنة 2025</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من التقييم الخارجي النهائي للمركز وفق معايير جائزة الملك عبدالعزيز للجودة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من الطرح والتعاقد لمشروع قياس مؤشر الثقافة المؤسسية OHBI  لقياس المؤشر لسنة 2026</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من اجراء تقييم OHBI  لسنة 2026</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (7)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تحليل الوضع الراهن ومعالجة الفجوات لجائزة الملك عبدالعزيز للجودة</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>تقرير نتائج قياس مؤشر الثقافة المؤسسية OHBI  لسنة 2024</td>
+          <td class="budget-col">339 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>التدريب لموظفي المركز للمقيم الداخلي وفق نموذج جائزة الملك عبدالعزيز للجودة</td>
+          <td class="budget-col">99 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>إصدار شهاداتISO  للتميز الحوكمي والمؤسسي</td>
+          <td class="budget-col">1.6 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>تقرير نتائج قياس مؤشر الثقافة المؤسسية OHBI  لسنة 2025</td>
+          <td class="budget-col">339 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">6</td>
+          <td>التقييم الخارجي النهائي للمركز وفق معايير جائزة الملك عبدالعزيز للجودة</td>
+          <td class="budget-col">50 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">7</td>
+          <td>تقرير نتائج قياس مؤشر الثقافة المؤسسية OHBI  لسنة 2026</td>
+          <td class="budget-col">339 ألف ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 19 -->
+    <div class="slide" id="slide-ini-19">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">19. تصميم وتنفيذ نموذج تواصل فعال لتحسين تجربة المستفيدين</div>
+      </div>
+      <div class="header-sub">ACS-SIE.07.TMO.OE.19 &nbsp;|&nbsp; التميز المؤسسي &nbsp;|&nbsp; مالك المبادرة: رائد الوهيبي</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">10</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">4</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">صفري</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">قيد التنفيذ</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2024-07-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2025-05-31</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكنات</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تحسين تجربة المستفيدين وأصحاب المصلحة من داخل وخارج المركز من خلال تطوير وتنفيذ نموذج عمل شامل للتواصل الفعّال، بما يعزز من مستوى إشراكهم وتفاعلهم ويسهم في بناء صورة ذهنية إيجابية ومتميزة للمركز. تسعى المبادرة إلى تبسيط عمليات التواصل والتعاون وتقديم الخدمات بطريقة تتسم بالكفاءة والسهولة، مما يضمن تجربة استثنائية ومرضية لأصحاب المصلحة، تعكس التزام المركز بتحقيق تطلعاتهم وتلبية احتياجاتهم بفعالية.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">تصميم وتنفيذ نموذج تواصل فعال لتحسين تجربة المستفيدين</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2024-07-01</td>
+          <td class="center-col">2025-05-31</td>
+          <td class="budget-col">صفري</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (10)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحليل الوضع الراهن لتجربة المستفيدين في المركز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من رسم خريطة أصحاب المصلحة بالإضافة إلى تحديد نقاط الاتصال والمدخلات وآليات التواصل مع المركز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من توثيق رحلات مختارة للمستفيدين مع توضيح نقاط الاتصال والمدخلات وآليات التواصل وتصميم خرائط للتعاطف</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحليل استبيانات أصحاب المصلحة فيما يخص تحسين تجربة المستفيدين</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تصميم استراتيجية لتحسين الصورة الذهنية</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من المواءمة لنماذج التواصل الفعال لتحسين تجربة المستفيدين</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير نموذج عمل للتفاعل والمشاركة مع أصحاب المصلحة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تصميم إطار عمل لمتابعة وقياس تجربة المستفيد</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تجربة إطار عمل متابعة وقياس تجربة المستفيد وتحليل النتائج ووضع التوصيات المناسبة للتحسين</div><div class="ms-item"><span class="ms-dot"></span>اعتماد نموذج عمل قياس تجربة المستفيد من قبل أصحاب المصلحة</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (4)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>وثيقة لرحلات المستفيدين، مع تحديد أصحاب المصلحة الرئيسيين بالإضافة إلى تحديد نقاط الاتصال والمدخلات وآليات التواصل مع المركز</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>استراتيجية وخارطة طريق لتحسين الصورة الذهنية لأصحاب المصلحة عن المركز</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>نموذج عمل للتواصل الفعال مع أصحاب المصلحة</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>إطار عمل لقياس رضا المستفيدين تشمل المؤشرات المناسبة لقياس فاعلية تجربة المستفيد</td>
+          <td class="budget-col">—</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 20 -->
+    <div class="slide" id="slide-ini-20">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">20. تحديد وتنفيذ خطة إدارة التغيير</div>
+      </div>
+      <div class="header-sub">ACS-SIE.07.TMO.SMO.15 &nbsp;|&nbsp; إدارة الاستراتيجية المؤسسية &nbsp;|&nbsp; مالك المبادرة: جواهر الجبرين</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">10</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">5</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">صفري</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-late2 badge-lg">متأخر جداً</span>
+            <span class="phase-tag">قيد التنفيذ</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2024-09-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2025-09-01</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكنات</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">معالجة جميع جوانب عمليات المنظمة المتأثرة بالاستراتيجية، حيث تشمل تقييم وتحديد التغييرات الضرورية، والتخطيط لتنفيذها، وإدارة عملية الانتقال، مع ضمان التواصل الفعال والدعم طوال رحلة تنفيذ الاستراتيجية. يتضمن ذلك إجراء تحليل لأصحاب المصلحة لفهم تأثير التغيير على كل قسم أو فئة من الموظفين، وتكييف خطة التواصل وفقًا لذلك. كما يشمل فهم التحديات الرئيسية التي قد تواجه في تنفيذ الاستراتيجية وتطوير الإجراءات التصحيحية المناسبة.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">مشروع بناء وتنفيذ خطة إدارة التغيير</td>
+          <td><span class="badge badge-complete">مكتمل</span></td>
+          <td class="center-col">2024-09-01</td>
+          <td class="center-col">2025-09-01</td>
+          <td class="budget-col">صفري</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (10)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقييم الوضع الراهن لمستوى النضج وتقبل التغيير بالمركز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير النسخة الأولية تقرير مستوى نضج المركز وتقبلهم للتغيير</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير النسخة النهائية تقرير مستوى نضج المركز وتقبلهم للتغيير</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة الأولية لتقرير تحليل تأثير التغيير الذي يصنّف أصحاب المصلحة بناءً على مستوى التغيير المتوقع الذي يؤثر عليهم</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير النسخة الأولية لخطة إدارة التغيير</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة النهائية لتقرير تحليل تأثير التغيير الذي يصنّف أصحاب المصلحة بناءً على مستوى التغيير المتوقع الذي يؤثر عليهم</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تطوير النسخة النهائية لخطة إدارة التغيير</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من استبانة آراء الموظفين حول التغيير</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة الأولية لتقرير احتياجات تدريب إدارة التغيير وخطة التنفيذ</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة النهائية لتقرير احتياجات تدريب إدارة التغيير وخطة التنفيذ</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (5)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>تقرير تقييم مستوى نضج المركز وتقبلهم للتغيير</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>تقرير تحليل تأثير التغيير الذي يصنّف أصحاب المصلحة بناءً على مستوى التغيير المتوقع الذي يؤثر عليهم</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>خطة إدارة التغيير</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>استبانة آراء الموظفين حول التغيير</td>
+          <td class="budget-col">—</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>تقرير احتياجات تدريب إدارة التغيير وخطة التنفيذ</td>
+          <td class="budget-col">—</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+    <!-- SLIDE: 21 -->
+    <div class="slide" id="slide-ini-21">
+      <div class="slide-header">
+        <div class="header-logo">أداء</div>
+        <div class="header-title">21. بناء استراتيجية للتحول الرقمي لمركز أداء</div>
+      </div>
+      <div class="header-sub">ACS-SIE.05.SS.IT.13 &nbsp;|&nbsp; تقنية الأعمال &nbsp;|&nbsp; مالك المبادرة: عبدالرزاق العنزي</div>
+      <div class="ini-content">
+        <!-- الجانب الأيسر -->
+        <div class="ini-left">
+          <div class="kpi-strip">
+            <div class="kpi-box kpi-teal"><div class="kpi-val">1</div><div class="kpi-lbl">المشاريع</div></div>
+            <div class="kpi-box kpi-blue"><div class="kpi-val">10</div><div class="kpi-lbl">المعالم</div></div>
+            <div class="kpi-box kpi-purple"><div class="kpi-val">7</div><div class="kpi-lbl">المخرجات</div></div>
+            <div class="kpi-box kpi-gold"><div class="kpi-val">6 م.ر</div><div class="kpi-lbl">الميزانية</div></div>
+          </div>
+          <div class="status-row">
+            <span class="badge badge-not-started badge-lg">لم يبدأ</span>
+            <span class="phase-tag">قيد التنفيذ</span>
+          </div>
+          <div class="info-grid">
+            <div class="info-card"><div class="info-label">تاريخ البدء</div><div class="info-val">2026-04-01</div></div>
+            <div class="info-card"><div class="info-label">تاريخ النهاية</div><div class="info-val">2027-02-28</div></div>
+            <div class="info-card"><div class="info-label">القطاع</div><div class="info-val">ممكنات</div></div>
+          </div>
+          <div class="scope-box">
+            <div class="section-bar bar-teal">نطاق المبادرة</div>
+            <div class="scope-text">تطوير استراتيجية شاملة للتحول الرقمي لمركز الأداء، من خلال أتمتة العمليات وتحسين الكفاءة التشغيلية وتعزيز الأمن السيبراني، بما يساهم في تحسين تجربة المستفيدين. تشمل المبادرة تقييم الوضع الراهن وتحليل الفجوات لتحديد مستوى نضج التحول الرقمي، وإعداد استراتيجية تتضمن تصورًا للبنية التقنية وخارطة طريق للتنفيذ. كما تهدف إلى دعم الإدارات المعنية في تنفيذ الاستراتيجية، وتحقيق التكامل بين الأنظمة والعمليات. بالإضافة إلى دمج التقنيات الحالية واستغلال الموارد المالية بشكل فعّال، مع تحديد احتياجات التدريب لضمان استدامة التحول الرقمي.</div>
+          </div>
+        </div>
+        <!-- الجانب الأيمن -->
+        <div class="ini-right">
+          <div class="section-bar bar-teal-dark">مشاريع المبادرة (1)</div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr>
+                <th class="num-col">#</th>
+                <th>اسم المشروع</th>
+                <th>الحالة</th>
+                <th class="center-col">البدء</th>
+                <th class="center-col">النهاية</th>
+                <th class="budget-col">الميزانية</th>
+              </tr></thead>
+              <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td class="name-col">بناء استراتيجية للتحول الرقمي لمركز أداء</td>
+          <td><span class="badge badge-not-started">لم يبدأ</span></td>
+          <td class="center-col">2026-04-01</td>
+          <td class="center-col">2027-02-28</td>
+          <td class="budget-col">6 م.ر</td>
+        </tr></tbody>
+            </table>
+          </div>
+          <div class="bottom-panels">
+            <div class="panel-miles">
+              <div class="section-bar bar-blue">المعالم (10)</div>
+              <div class="miles-list"><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقرير دراسة الوضع الراهن</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من حصر وتحليل أفضل الممارسات العالمية (Benchmark)  في التحول الرقمي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تقييم نضج عمليات التحول الرقمي للمركز</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من بناء التصور العام للبنية التقنية وتحديد التقنيات والأدوات الرقمية وتحديد آلية لإدارة البيانات ومعالجتها  (Application, Data and Infrastructure Landscape)</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من النسخة الأولى لوثيقة استراتيجية التحول الرقمي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من وثيقة استراتيجية التحول الرقمي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من خارطة الطريق لتنفيذ الاستراتيجية متضمنه عدة خيارات للتنفيذ</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديث السياسات والإجراءات للإدارات ذات العلاقة حسب التوجه الاستراتيجي للتحول الرقمي</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد إطار العمل  للإدارات ذات العلاقة</div><div class="ms-item"><span class="ms-dot"></span>الانتهاء من تحديد المهارات المطلوبة لتنفيذ الاستراتيجية وتحديد قائمة بالاحتياجات التدريبية استناداً إلى الفجوات الحالية في المنظمة</div></div>
+            </div>
+            <div class="panel-delivs">
+              <div class="section-bar bar-purple">المخرجات (7)</div>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead><tr><th class="num-col">#</th><th>المخرج</th><th class="budget-col">القيمة</th></tr></thead>
+                  <tbody>
+        <tr>
+          <td class="num-col">1</td>
+          <td>وثيقة تقييم الوضع الراهن</td>
+          <td class="budget-col">900 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">2</td>
+          <td>وثيقة المقارنة المعيارية</td>
+          <td class="budget-col">600 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">3</td>
+          <td>تقرير تقييم نضج عمليات التحول الرقمي للمركز</td>
+          <td class="budget-col">600 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">4</td>
+          <td>وثيقة استراتيجية التحول الرقمي</td>
+          <td class="budget-col">1.2 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">5</td>
+          <td>خارطة طريق لتنفيذ الاستراتيجية</td>
+          <td class="budget-col">1.2 م.ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">6</td>
+          <td>تحديث السياسات والإجراءات للإدارات ذات العلاقة حسب التوجه الاستراتيجي للتحول الرقمي</td>
+          <td class="budget-col">900 ألف ر</td>
+        </tr>
+        <tr>
+          <td class="num-col">7</td>
+          <td>تحديد المهارات المطلوبة لتنفيذ الاستراتيجية وتحديد قائمة بالاحتياجات التدريبية استناداً إلى الفجوات الحالية في المنظمة</td>
+          <td class="budget-col">600 ألف ر</td>
+        </tr></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>المركز الوطني لقياس أداء الأجهزة العامة &nbsp;|&nbsp; تقرير حالة المبادرات الاستراتيجية &nbsp;|&nbsp; 2025–2028</span>
+        <span class="footer-secret">سري للغاية</span>
+      </div>
+    </div>
+
+<!-- ===== FINAL SLIDE ===== -->
+<div class="slide slide-divider" id="slide-final">
+  <div class="gold-bar-top"></div>
+  <div class="div-geo1"></div>
+  <div class="div-geo2"></div>
+  <div class="div-content" style="text-align:center">
+    <div style="font-size:52px;font-weight:900;color:#fff;margin-bottom:8px;">أداء</div>
+    <div style="font-size:13px;color:#C8E6E3;margin-bottom:24px;">المركز الوطني لقياس أداء الأجهزة العامة</div>
+    <div style="font-size:42px;font-weight:800;color:#fff;margin-bottom:12px;">شكراً</div>
+    <div style="font-size:14px;color:#C8E6E3;">للاستفسارات يُرجى التواصل مع مكتب إدارة التحول الاستراتيجي</div>
+  </div>
+  <div class="gold-bar-bottom"></div>
+</div>
+
+</div><!-- #main -->
+
+<script>
+// ========== SLIDE DATA ==========
+const INI_NUMS = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21];
+const SLIDE_IDS = ['slide-cover','slide-agenda','slide-stats','slide-dashboard','slide-divider-main', ...INI_NUMS.map(n=>'slide-ini-'+n), 'slide-final'];
+let current = 0;
+
+document.getElementById('total-count').textContent = SLIDE_IDS.length;
+
+// ========== SIDEBAR ITEMS ==========
+const sidebarIni = document.getElementById('sidebar-ini-items');
+INI_NUMS.forEach(n => {
+  const el = document.getElementById('slide-ini-'+n);
+  if (!el) return;
+  const titleEl = el.querySelector('.header-title');
+  const title = titleEl ? titleEl.textContent.trim() : 'مبادرة '+n;
+  const badgeEl = el.querySelector('.badge');
+  const badgeClass = badgeEl ? badgeEl.className.replace('badge ','').replace(' badge-lg','') : 'badge-not-started';
+  const dotClass = badgeClass.replace('badge-','dot-');
+  const div = document.createElement('div');
+  div.className = 'sidebar-item';
+  div.id = 'si-ini-'+n;
+  div.innerHTML = `<span class="sidebar-dot ${dotClass}"></span>${title.replace(/^\d+\.\s*/,'')}`;
+  div.onclick = () => goToIni(n);
+  sidebarIni.appendChild(div);
+});
+
+// ========== NAVIGATION ==========
+function showSlide(idx) {
+  if (idx < 0 || idx >= SLIDE_IDS.length) return;
+  document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sidebar-item').forEach(s => s.classList.remove('active'));
+  const id = SLIDE_IDS[idx];
+  const el = document.getElementById(id);
+  if (el) el.classList.add('active');
+  current = idx;
+  document.getElementById('counter').textContent = (idx+1) + ' / ' + SLIDE_IDS.length;
+  // sidebar highlight
+  if (id.startsWith('slide-ini-')) {
+    const n = id.replace('slide-ini-','');
+    const si = document.getElementById('si-ini-'+n);
+    if (si) si.classList.add('active');
+  }
+  window.scrollTo(0,0);
+}
+
+function nextSlide() { showSlide(current+1); }
+function prevSlide() { showSlide(current-1); }
+function goTo(idx) { showSlide(idx); }
+
+function goToIni(n) {
+  const id = 'slide-ini-'+n;
+  const idx = SLIDE_IDS.indexOf(id);
+  if (idx >= 0) showSlide(idx);
+}
+
+// keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowRight' || e.key === 'ArrowUp') prevSlide();
+});
+
+// click dashboard rows
+function goToIni(n) {
+  const id = 'slide-ini-'+n;
+  const idx = SLIDE_IDS.indexOf(id);
+  if (idx >= 0) showSlide(idx);
+}
+
+showSlide(0);
+</script>
+</body>
+</html>
